@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import SalaryCalculator from '../../components/calculator/react/calculators/SalaryCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('salary');
+if (!definition) throw new Error('Salary calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Salary structures, payroll rules and deductions vary by employer and state. This estimate is not a payslip or tax calculation.">
+  <SalaryCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How in-hand salary is estimated" formula="Gross = CTC − employer-side benefits; In-hand = Gross − employee EPF − professional tax − other deductions" description="When gross salary is entered directly, the first subtraction is skipped. Only deductions explicitly entered are removed." variables={[
+    { symbol: 'CTC', meaning: 'Total annual employer cost, which can include benefits outside gross pay.' }, { symbol: 'Gross', meaning: 'Salary before employee-side deductions.' }, { symbol: 'EPF', meaning: 'Employee contribution estimated from entered basic salary and rate.' }, { symbol: 'In-hand', meaning: 'Estimated amount after the shown deductions.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'Employer-side benefits are entered by the user rather than inferred from a standard salary structure.',
+    'Employee EPF is calculated only from the basic salary and percentage entered.',
+    'Professional tax and other deductions are applied only when entered.',
+    'Income tax, bonuses, reimbursements and variable pay are not included in the in-hand result.',
+  ]} />
+  <EducationSection slot="education" title="Understand salary terminology" intro="CTC, gross and in-hand salary describe different layers of an employee compensation structure." items={[
+    { title: 'CTC vs gross salary', body: 'CTC can include employer PF, gratuity, insurance or other benefits that do not appear as monthly gross pay.' },
+    { title: 'Gross vs net salary', body: 'Gross salary is before employee deductions. Net or in-hand salary is what remains after payroll deductions.' },
+    { title: 'Common deductions', body: 'Employee EPF, professional tax, income tax and employer-specific recoveries can reduce take-home pay.' },
+  ]} />
+</CalculatorShell>

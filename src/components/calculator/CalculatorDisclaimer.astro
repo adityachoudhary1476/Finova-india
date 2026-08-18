@@ -1,0 +1,58 @@
+---
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<aside class="calculator-disclaimer" aria-labelledby="calculator-disclaimer-title">
+  <Icon name="shield" size={20} />
+  <div>
+    <h2 id="calculator-disclaimer-title">Estimate, not financial advice</h2>
+    <p>{text} Finova provides this calculation for informational and educational purposes only.</p>
+    <p class="calculator-disclaimer__links"><a href="/methodology">Calculation methodology</a><span aria-hidden="true">·</span><a href="/disclaimer">Full disclaimer</a></p>
+  </div>
+</aside>
+
+<style>
+  .calculator-disclaimer {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    padding: 1.25rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+    color: var(--pc-accent);
+  }
+
+  .calculator-disclaimer h2 {
+    margin-bottom: 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 680;
+  }
+
+  .calculator-disclaimer p {
+    margin: 0;
+    color: var(--pc-muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  .calculator-disclaimer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.55rem !important;
+  }
+
+  .calculator-disclaimer__links a {
+    color: var(--pc-accent);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

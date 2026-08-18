@@ -1,0 +1,363 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/calculator/Breadcrumbs.astro';
+import RelatedCalculators from '../../components/calculator/RelatedCalculators.astro';
+import FaqSection from '../../components/content/FaqSection.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { calculatorById, isLiveCalculator } from '../../data/calculators';
+import { guides } from '../../data/guides';
+import type { GuideDefinition } from '../../data/types';
+
+export function getStaticPaths() {
+  return guides.map((guide) => ({
+    params: { slug: guide.slug },
+    props: { guide },
+  }));
+}
+
+interface Props {
+  guide: GuideDefinition;
+}
+
+const { guide } = Astro.props;
+const route = `/guides/${guide.slug}`;
+const pageUrl = new URL(route, Astro.site ?? Astro.url.origin).toString();
+const guidesUrl = new URL('/guides', Astro.site ?? Astro.url.origin).toString();
+const homeUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
+const relatedCalculators = guide.relatedCalculatorIds
+  .map((id) => calculatorById.get(id))
+  .filter(isLiveCalculator);
+const relatedGuides = guides.filter((item) => item.slug !== guide.slug).slice(0, 2);
+const updatedLabel = new Intl.DateTimeFormat('en-IN', {
+  day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC',
+}).format(new Date(`${guide.updatedDate}T00:00:00Z`));
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: guide.title,
+      description: guide.seoDescription,
+      dateModified: guide.updatedDate,
+      url: pageUrl,
+      inLanguage: 'en-IN',
+      mainEntityOfPage: pageUrl,
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: guide.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+        { '@type': 'ListItem', position: 2, name: 'Guides', item: guidesUrl },
+        { '@type': 'ListItem', position: 3, name: guide.title, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={guide.seoTitle}
+  description={guide.seoDescription}
+  canonicalPath={route}
+  structuredData={structuredData}
+  ogType="article"
+>
+  <article class="guide-page site-container">
+    <Breadcrumbs items={[
+      { label: 'Home', href: '/' },
+      { label: 'Guides', href: '/guides' },
+      { label: guide.title },
+    ]} />
+
+    <header class="guide-page__header">
+      <span class="eyebrow">{guide.category} guide</span>
+      <h1>{guide.title}</h1>
+      <p>{guide.description}</p>
+      <div class="guide-page__meta">
+        <span><Icon name="clock" size={16} /> {guide.readTime}</span>
+        <span><Icon name="file-text" size={16} /> Last updated {updatedLabel}</span>
+      </div>
+    </header>
+
+    <div class="guide-page__body">
+      <aside class="guide-page__contents" aria-label="On this page">
+        <strong>On this page</strong>
+        <ol>
+          {guide.sections.map((section, index) => (
+            <li><a href={`#section-${index + 1}`}>{section.title}</a></li>
+          ))}
+        </ol>
+      </aside>
+
+      <div class="guide-page__article">
+        {guide.sections.map((section, index) => (
+          <section id={`section-${index + 1}`}>
+            <span class="guide-page__section-number tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            )}
+          </section>
+        ))}
+
+        <div class="guide-page__note" role="note">
+          <Icon name="shield" size={20} />
+          <p>This guide is educational. It explains calculator concepts and does not recommend a financial product or replace professional advice.</p>
+        </div>
+      </div>
+    </div>
+
+    <FaqSection items={guide.faqs} />
+    <RelatedCalculators calculators={relatedCalculators} />
+
+    <section class="guide-page__related" aria-labelledby="related-reading-title">
+      <div>
+        <span class="eyebrow">Continue reading</span>
+        <h2 id="related-reading-title">Related guides</h2>
+      </div>
+      <ul>
+        {relatedGuides.map((item) => (
+          <li>
+            <a href={`/guides/${item.slug}`}>
+              <span>{item.category}</span>
+              <strong>{item.title}</strong>
+              <Icon name="arrow-up-right" size={18} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    padding: 1rem 0 var(--pc-section-space);
+  }
+
+  .guide-page__header {
+    max-width: 62rem;
+    padding: clamp(3rem, 8vw, 7rem) 0;
+  }
+
+  .guide-page h1 {
+    margin: 1.25rem 0 1.25rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3rem, 8vw, 6.75rem);
+    font-weight: 520;
+    letter-spacing: -0.06em;
+    line-height: 0.94;
+  }
+
+  .guide-page__header > p {
+    max-width: 46rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .guide-page__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .guide-page__meta span {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--pc-muted);
+    font-size: 0.7rem;
+  }
+
+  .guide-page__meta :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  .guide-page__body {
+    display: grid;
+    gap: 2.5rem;
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .guide-page__contents {
+    align-self: start;
+    padding: 1.25rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-surface);
+  }
+
+  .guide-page__contents > strong {
+    color: var(--pc-muted);
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .guide-page__contents ol {
+    display: grid;
+    gap: 0.25rem;
+    margin: 1rem 0 0;
+    padding-left: 1.15rem;
+  }
+
+  .guide-page__contents a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--pc-text);
+    font-size: 0.76rem;
+    transition: color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .guide-page__contents a:hover {
+    color: var(--pc-accent);
+  }
+
+  .guide-page__article {
+    min-width: 0;
+  }
+
+  .guide-page__article section {
+    max-width: 48rem;
+    padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+    scroll-margin-top: 2rem;
+  }
+
+  .guide-page__section-number {
+    color: var(--pc-accent);
+    font-family: var(--pc-font-mono);
+    font-size: 0.65rem;
+  }
+
+  .guide-page__article h2,
+  .guide-page__related h2 {
+    margin: 0.7rem 0 1.25rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 540;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+
+  .guide-page__article p,
+  .guide-page__article li {
+    color: var(--pc-text);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+  }
+
+  .guide-page__article p {
+    margin-bottom: 1.1rem;
+  }
+
+  .guide-page__article ul {
+    display: grid;
+    gap: 0.65rem;
+    padding-left: 1.25rem;
+  }
+
+  .guide-page__article li::marker {
+    color: var(--pc-accent);
+  }
+
+  .guide-page__note {
+    display: grid;
+    max-width: 48rem;
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem;
+    padding: 1.1rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .guide-page__note p {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+
+  .guide-page :global(.faq-section),
+  .guide-page :global(.related) {
+    margin-top: var(--pc-section-space);
+  }
+
+  .guide-page__related {
+    display: grid;
+    gap: 2rem;
+    margin-top: var(--pc-section-space);
+    padding-top: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .guide-page__related h2 {
+    margin-top: 1rem;
+  }
+
+  .guide-page__related ul {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--pc-border);
+    list-style: none;
+  }
+
+  .guide-page__related a {
+    display: grid;
+    min-height: 5rem;
+    grid-template-columns: minmax(5rem, 0.25fr) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .guide-page__related a span {
+    color: var(--pc-accent);
+    font-size: 0.66rem;
+    font-weight: 680;
+    text-transform: uppercase;
+  }
+
+  .guide-page__related a strong {
+    color: var(--pc-ink);
+    font-size: 0.82rem;
+    font-weight: 620;
+  }
+
+  .guide-page__related a :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  @media (min-width: 64rem) {
+    .guide-page__body {
+      grid-template-columns: minmax(13rem, 0.34fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+
+    .guide-page__contents {
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .guide-page__related {
+      grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+</style>

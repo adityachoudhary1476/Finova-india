@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 64" fill="none">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#123B2C" />
+      <stop offset="100%" style="stop-color:#0a251a" />
+    </linearGradient>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4622D" />
+      <stop offset="100%" style="stop-color:#F5EFE2" />
+    </linearGradient>
+    <linearGradient id="wordmarkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#123B2C" />
+      <stop offset="100%" style="stop-color:#0a251a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: 97 wide -->
+  <path d="M2 2
+           L2 32
+           L12 32
+           L12 16
+           L22 16
+           L22 2
+           C38 2 62 8 82 22
+           L82 32
+           C78 44 64 50 50 55
+           L2 32Z" fill="url(#markGrad)" />
+
+  <!-- Terracotta lower-left triangle part of the mark -->
+  <polygon points="2 32  12 32  12 56  2 56" fill="#C4622D" />
+
+  <!-- Wordmark "finova" - lowercase geometric sans-serif -->
+  <!-- f: distinctive long x-height crossbar -->
+  <path d="M97 12 L137 12 L137 24 L102 24 L102 40 H97 Z" fill="#123B2C" />
+  
+  <!-- i: diamond/lozenge-shaped dot -->
+  <polygon points="115 20 119 20 119 24 115 24" fill="#123B2C" />
+  
+  <!-- n: two strokes -->
+  <path d="M122 12 L122 32 M126 12 L130 32" fill="none" stroke="#123B2C" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- o: circular shape -->
+  <circle cx="140" cy="26" r="14" fill="#123B2C" />
+  
+  <!-- v: pointed shape -->
+  <path d="M152 12 L158 40 L164 12 Z" fill="#123B2C" />
+  
+  <!-- a: single-story with diamond base -->
+  <path d="M168 22 L174 10 L180 22 L174 34 L168 22 Z M171 28 L175 28 L175 32 L171 32 Z" fill="#123B2C" />
+  
+  <!-- 12px gap between mark and wordmark -->
+  <line x1="207" y1="2" x2="207" y2="60" stroke="#123B2C" stroke-width="1" opacity="0.3"/>
+</svg>

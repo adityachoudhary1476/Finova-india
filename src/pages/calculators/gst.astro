@@ -1,0 +1,28 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import GstCalculator from '../../components/calculator/react/calculators/GstCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('gst');
+if (!definition) throw new Error('GST calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Confirm the correct GST classification, place-of-supply treatment and applicable rate separately. This tool performs arithmetic only.">
+  <GstCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How GST is added or removed" formula="Add: GST = Base × rate ÷ 100; Remove: Base = Inclusive ÷ (1 + rate ÷ 100)" description="Adding starts with a pre-tax base. Removing starts with a GST-inclusive total and works backwards to the original base." variables={[
+    { symbol: 'Base', meaning: 'Amount before GST.' }, { symbol: 'Rate', meaning: 'GST percentage selected or entered.' }, { symbol: 'GST', meaning: 'Tax component calculated from the base.' }, { symbol: 'Inclusive', meaning: 'Base amount plus GST.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The selected rate is assumed to be correct for the transaction.',
+    'The calculator does not determine HSN/SAC classification or applicable GST law.',
+    'CGST, SGST and IGST allocation is not split because the total arithmetic is the same.',
+    'Rounding on invoices or accounting systems can create small differences.',
+  ]} />
+  <EducationSection slot="education" title="Understand GST arithmetic" intro="Adding and removing GST are inverse calculations and should not be confused with income tax." items={[
+    { title: 'What is GST?', body: 'Goods and Services Tax is an indirect tax applied to taxable supplies at rates determined under GST rules.' },
+    { title: 'Adding GST', body: 'Multiply the base amount by the rate, then add that GST component to the base.' },
+    { title: 'Removing GST', body: 'Do not simply subtract the rate percentage. Divide the inclusive amount by one plus the rate as a decimal.' },
+    { title: 'Choose the rate carefully', body: 'Common rate buttons are conveniences, not a determination of which rate legally applies.' },
+  ]} />
+</CalculatorShell>

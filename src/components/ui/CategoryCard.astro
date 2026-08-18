@@ -1,0 +1,156 @@
+---
+import type { CalculatorCategory, CalculatorItem } from '../../data/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  category: CalculatorCategory;
+  calculators: readonly CalculatorItem[];
+}
+
+const { category, calculators } = Astro.props;
+---
+
+<article class="category-card">
+  <header>
+    <span class="category-card__icon"><Icon name={category.icon} size={20} /></span>
+    <span class="category-card__count tabular-nums">{String(calculators.length).padStart(2, '0')} tools</span>
+  </header>
+  <h3><a href={`/calculators/category/${category.id}`}>{category.title}</a></h3>
+  <p>{category.description}</p>
+  <ul aria-label={`${category.title} calculators`}>
+    {calculators.map((calculator) => (
+      <li id={calculator.id}>
+        {calculator.availability === 'live' ? (
+          <a href={calculator.route}>
+            <span>{calculator.shortName}</span>
+            <Icon name="arrow-up-right" size={15} />
+          </a>
+        ) : (
+          <>
+            <span>{calculator.shortName}</span>
+            <span class="category-card__dash" aria-hidden="true"></span>
+          </>
+        )}
+      </li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  .category-card {
+    height: 100%;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-lg);
+    background: color-mix(in srgb, var(--pc-surface) 92%, var(--pc-canvas));
+  }
+
+  .category-card header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .category-card__icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid var(--pc-border);
+    border-radius: 50%;
+    background: var(--pc-surface);
+    color: var(--pc-accent);
+  }
+
+  .category-card__count {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  .category-card h3 {
+    margin-bottom: 0.6rem;
+    font-family: var(--pc-font-display);
+    font-size: 1.65rem;
+    font-variation-settings: 'opsz' 36, 'SOFT' 50;
+    font-weight: 560;
+    letter-spacing: -0.025em;
+  }
+
+  .category-card h3 a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    transition: color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .category-card h3 a:hover {
+    color: var(--pc-accent);
+  }
+
+  .category-card > p {
+    min-height: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--pc-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .category-card ul {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--pc-border);
+    list-style: none;
+  }
+
+  .category-card li {
+    display: flex;
+    min-height: 2.85rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--pc-border);
+    color: var(--pc-text);
+    font-size: 0.88rem;
+    font-weight: 560;
+    scroll-margin-top: 6rem;
+  }
+
+  .category-card li:last-child {
+    border-bottom: 0;
+  }
+
+  .category-card li a {
+    display: flex;
+    width: 100%;
+    min-height: 2.85rem;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--pc-text);
+    transition: color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .category-card li a:hover {
+    color: var(--pc-accent);
+  }
+
+  .category-card li a :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  .category-card li:target {
+    margin-inline: -0.5rem;
+    padding-inline: 0.5rem;
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .category-card__dash {
+    width: 0.8rem;
+    height: 1px;
+    flex: 0 0 auto;
+    background: var(--pc-border-strong);
+  }
+</style>

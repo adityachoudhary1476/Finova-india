@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 64" fill="none">
+  <!-- Mark: all dark green #123B2C, no terracotta -->
+  <path d="M2 2
+           L2 32
+           L12 32
+           L12 16
+           L22 16
+           L22 2
+           C38 2 62 8 82 22
+           L82 32
+           C78 44 64 50 50 55
+           L2 32Z" fill="#123B2C" />
+
+  <!-- No terracotta triangle in mono version -->
+
+  <!-- Wordmark "finova" - all dark green -->
+  <!-- f: distinctive long x-height crossbar -->
+  <path d="M97 12 L137 12 L137 24 L102 24 L102 40 H97 Z" fill="#123B2C" />
+  
+  <!-- i: diamond/lozenge-shaped dot -->
+  <polygon points="115 20 119 20 119 24 115 24" fill="#123B2C" />
+  
+  <!-- n: two strokes -->
+  <path d="M122 12 L122 32 M126 12 L130 32" fill="none" stroke="#123B2C" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- o: circular shape -->
+  <circle cx="140" cy="26" r="14" fill="#123B2C" />
+  
+  <!-- v: pointed shape -->
+  <path d="M152 12 L158 40 L164 12 Z" fill="#123B2C" />
+  
+  <!-- a: single-story with diamond base -->
+  <path d="M168 22 L174 10 L180 22 L174 34 L168 22 Z M171 28 L175 28 L175 32 L171 32 Z" fill="#123B2C" />
+  
+  <!-- 12px gap between mark and wordmark -->
+  <line x1="207" y1="2" x2="207" y2="60" stroke="#123B2C" stroke-width="1" opacity="0.3"/>
+</svg>

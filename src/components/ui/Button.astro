@@ -1,0 +1,60 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary' | 'quiet';
+  icon?: 'arrow-up-right' | 'search';
+  class?: string;
+}
+
+const { href, label, variant = 'primary', icon, class: className } = Astro.props;
+---
+
+<a class:list={['button', `button--${variant}`, className]} href={href}>
+  <span>{label}</span>
+  {icon && <Icon name={icon} size={17} />}
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    gap: 0.625rem;
+    padding: 0.625rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--pc-radius-md);
+    font-size: 0.875rem;
+    font-weight: 650;
+    line-height: 1.25;
+    transition: background-color var(--pc-duration-fast) var(--pc-ease), border-color var(--pc-duration-fast) var(--pc-ease), color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .button--primary {
+    background: var(--pc-accent);
+    color: white;
+  }
+
+  .button--primary:hover {
+    background: var(--pc-accent-hover);
+  }
+
+  .button--secondary {
+    border-color: var(--pc-border-strong);
+    background: var(--pc-surface);
+    color: var(--pc-ink);
+  }
+
+  .button--secondary:hover {
+    border-color: var(--pc-accent);
+    color: var(--pc-accent);
+  }
+
+  .button--quiet {
+    padding-inline: 0;
+    color: var(--pc-accent);
+  }
+</style>

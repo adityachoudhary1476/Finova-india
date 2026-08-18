@@ -1,0 +1,99 @@
+---
+interface VariableItem {
+  symbol: string;
+  meaning: string;
+}
+
+interface Props {
+  title?: string;
+  formula: string;
+  description: string;
+  variables: readonly VariableItem[];
+}
+
+const { title = 'How the formula works', formula, description, variables } = Astro.props;
+---
+
+<section class="formula-section content-section" aria-labelledby="formula-title">
+  <div class="content-section__heading">
+    <span class="eyebrow">Formula</span>
+    <h2 id="formula-title">{title}</h2>
+    <p>{description}</p>
+  </div>
+
+  <div class="formula-section__panel">
+    <code tabindex="0" aria-label="Calculation formula">{formula}</code>
+    <dl>
+      {variables.map((variable) => (
+        <div>
+          <dt>{variable.symbol}</dt>
+          <dd>{variable.meaning}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .formula-section {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .formula-section__panel {
+    overflow: hidden;
+    border: 1px solid var(--pc-border-strong);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+  }
+
+  .formula-section code {
+    display: block;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    overflow-x: auto;
+    border-bottom: 1px solid var(--pc-border);
+    background: var(--pc-accent-wash);
+    color: var(--pc-ink);
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 560;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .formula-section dl {
+    margin: 0;
+    padding: 0 clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .formula-section dl > div {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .formula-section dl > div:last-child {
+    border-bottom: 0;
+  }
+
+  .formula-section dt {
+    color: var(--pc-accent);
+    font-family: var(--pc-font-display);
+    font-weight: 650;
+  }
+
+  .formula-section dd {
+    margin: 0;
+    color: var(--pc-text);
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 64rem) {
+    .formula-section {
+      grid-template-columns: minmax(0, 0.7fr) minmax(28rem, 1fr);
+      align-items: start;
+    }
+  }
+</style>

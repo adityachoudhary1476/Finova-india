@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 64" fill="none">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#123B2C" />
+      <stop offset="100%" style="stop-color:#0a251a" />
+    </linearGradient>
+    <linearGradient id="terracottaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4622D" />
+      <stop offset="100%" style="stop-color:#F5EFE2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Terracotta lower-left triangle (part of the mark) -->
+  <polygon points="2 32  12 32  12 56  2 56" fill="#C4622D" />
+
+  <!-- Dark green wedge main body with upper-left step -->
+  <path d="M2 2
+           L2 32
+           L12 32
+           L12 16
+           L22 16
+           L22 2
+           C38 2 62 8 82 22
+           L82 32
+           C78 44 64 50 50 55
+           L2 32Z" fill="#123B2C" />
+</svg>

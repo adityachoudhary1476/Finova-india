@@ -1,0 +1,65 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import EmiCalculator from '../../components/calculator/react/calculators/EmiCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+
+const definition = calculatorBySlug.get('emi');
+if (!definition) throw new Error('EMI calculator metadata is missing.');
+
+const assumptions = [
+  'The loan uses a fixed annual interest rate for the full tenure.',
+  'Repayments happen monthly using the standard reducing-balance method.',
+  'Processing fees, insurance, penalties, taxes and lender-specific charges are not included.',
+  'The annual schedule is an estimate; lender statements can differ slightly because of rounding and payment dates.',
+] as const;
+
+const education = [
+  {
+    title: 'What is EMI?',
+    body: 'EMI means Equated Monthly Instalment—the fixed amount paid each month toward principal and interest. Early payments usually contain more interest; later payments reduce more principal.',
+  },
+  {
+    title: 'What affects EMI?',
+    body: 'A larger loan or higher rate increases EMI. A longer tenure usually lowers the monthly payment but can increase the total interest paid over the life of the loan.',
+  },
+  {
+    title: 'How is interest reduced?',
+    body: 'A prepayment reduces outstanding principal. If the lender applies it without a large charge, future interest is calculated on a smaller balance. Actual treatment depends on the loan agreement.',
+  },
+  {
+    title: 'How to read the schedule',
+    body: 'Opening balance is what remains at the start of a year. Principal paid reduces the debt; interest paid is the borrowing cost; closing balance carries into the next year.',
+  },
+] as const;
+---
+
+<CalculatorShell
+  definition={definition}
+  disclaimer="Actual EMIs can vary because of lender rounding, rate changes, fees, payment timing and loan terms."
+>
+  <EmiCalculator slot="calculator" client:load />
+
+  <FormulaSection
+    slot="formula"
+    title="How EMI is calculated"
+    formula="EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)"
+    description="The standard reducing-balance formula spreads principal and interest across equal monthly payments. A zero-interest loan is handled as principal divided by the number of months."
+    variables={[
+      { symbol: 'P', meaning: 'Principal—the amount borrowed.' },
+      { symbol: 'r', meaning: 'Monthly interest rate: annual rate ÷ 12 ÷ 100.' },
+      { symbol: 'n', meaning: 'Total number of monthly instalments.' },
+      { symbol: 'EMI', meaning: 'The estimated payment due each month.' },
+    ]}
+  />
+
+  <AssumptionsSection slot="assumptions" items={assumptions} />
+  <EducationSection
+    slot="education"
+    title="Understand your loan repayment"
+    intro="The monthly number is only one part of a loan. Tenure, rate and total interest explain the full borrowing cost."
+    items={education}
+  />
+</CalculatorShell>

@@ -1,0 +1,95 @@
+---
+import '@fontsource-variable/fraunces/wght.css';
+import '@fontsource-variable/public-sans/wght.css';
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  structuredData?: Record<string, unknown>;
+  ogType?: 'website' | 'article';
+  noIndex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  structuredData,
+  ogType = 'website',
+  noIndex = false,
+} = Astro.props;
+const canonicalUrl = canonicalPath
+  ? new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString()
+  : undefined;
+const serializedStructuredData = structuredData
+  ? JSON.stringify(structuredData).replaceAll('<', '\\u003c')
+  : undefined;
+const siteUrl = (Astro.site ?? Astro.url.origin).toString().replace(/\/$/, '');
+const ogImageUrl = `${siteUrl}/images/finova-og.png`;
+---
+
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#F5EFE2" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content={description} />
+    <meta name="robots" content={noIndex ? 'noindex, follow' : 'index, follow'} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:site_name" content="Finova" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/images/finova-favicon.png" />
+    <link rel="apple-touch-icon" href="/images/finova-app-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    {serializedStructuredData && <script is:inline type="application/ld+json" set:html={serializedStructuredData} />}
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <Navigation />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-ink);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 650;
+    transform: translateY(-160%);
+    transition: transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .skip-link:focus {
+    outline-color: var(--pc-warm);
+    transform: translateY(0);
+  }
+</style>

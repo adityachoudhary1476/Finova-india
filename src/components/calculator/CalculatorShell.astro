@@ -1,0 +1,115 @@
+---
+import type { CalculatorItem } from '../../data/types';
+import { calculatorById, categoryById, isLiveCalculator } from '../../data/calculators';
+import { calculatorReferences } from '../../data/calculatorReferences';
+import { guides } from '../../data/guides';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import CalculatorHeader from './CalculatorHeader.astro';
+import RelatedCalculators from './RelatedCalculators.astro';
+import RelatedGuides from './RelatedGuides.astro';
+import ReferenceNotice from './ReferenceNotice.astro';
+import CalculatorDisclaimer from './CalculatorDisclaimer.astro';
+
+interface Props {
+  definition: CalculatorItem;
+  disclaimer: string;
+}
+
+const { definition, disclaimer } = Astro.props;
+const category = categoryById.get(definition.category);
+const categoryLabel = category?.title ?? 'Calculators';
+const categoryRoute = category ? `/calculators/category/${category.id}` : '/calculators';
+const related = definition.relatedCalculatorIds
+  .map((id) => calculatorById.get(id))
+  .filter(isLiveCalculator);
+const relatedGuides = guides
+  .filter((guide) => guide.relatedCalculatorIds.includes(definition.id))
+  .slice(0, 2);
+const reference = calculatorReferences[definition.id];
+const canonicalPath = definition.route;
+const canonicalUrl = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString();
+const homeUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
+const calculatorsUrl = new URL('/calculators', Astro.site ?? Astro.url.origin).toString();
+const categoryUrl = new URL(categoryRoute, Astro.site ?? Astro.url.origin).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: definition.name,
+      description: definition.seoDescription,
+      url: canonicalUrl,
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Any',
+      inLanguage: 'en-IN',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'INR',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+        { '@type': 'ListItem', position: 2, name: 'Calculators', item: calculatorsUrl },
+        { '@type': 'ListItem', position: 3, name: categoryLabel, item: categoryUrl },
+        { '@type': 'ListItem', position: 4, name: definition.name, item: canonicalUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={definition.seoTitle}
+  description={definition.seoDescription}
+  canonicalPath={canonicalPath}
+  structuredData={structuredData}
+>
+  <div class="calculator-page">
+    <div class="site-container">
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Calculators', href: '/calculators' },
+        { label: categoryLabel, href: categoryRoute },
+        { label: definition.name },
+      ]} />
+      <CalculatorHeader definition={definition} categoryLabel={categoryLabel} />
+      {reference && <ReferenceNotice reference={reference} />}
+    </div>
+
+    <section class="calculator-tool" aria-label={`${definition.name} interactive tool`}>
+      <div class="site-container">
+        <slot name="calculator" />
+      </div>
+    </section>
+
+    <div class="calculator-content site-container">
+      <slot name="formula" />
+      <slot name="assumptions" />
+      <slot name="education" />
+      <RelatedCalculators calculators={related} />
+      <RelatedGuides guides={relatedGuides} />
+      <CalculatorDisclaimer text={disclaimer} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .calculator-page {
+    padding-top: 1rem;
+  }
+
+  .calculator-tool {
+    padding: 0 0 clamp(4.5rem, 8vw, 7rem);
+  }
+
+  .calculator-content {
+    display: grid;
+    gap: clamp(4.5rem, 9vw, 8rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+</style>

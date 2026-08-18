@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/calculator/Breadcrumbs.astro';
+import DirectoryCalculatorCard from '../../components/calculator/DirectoryCalculatorCard.astro';
+import { getLiveCalculatorsByCategory, liveCalculators, liveCategories } from '../../data/calculators';
+
+const title = 'Financial Calculators for India | Finova';
+const description = 'Free Indian financial calculators for loans, investing, tax and salary. See formulas, assumptions and clear result breakdowns without signup.';
+const canonicalUrl = new URL('/calculators', Astro.site ?? Astro.url.origin).toString();
+const homeUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: canonicalUrl,
+      inLanguage: 'en-IN',
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: liveCalculators.length,
+        itemListElement: liveCalculators.map((calculator, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: calculator.name,
+          url: new URL(calculator.route, Astro.site ?? Astro.url.origin).toString(),
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+        { '@type': 'ListItem', position: 2, name: 'Calculators', item: canonicalUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/calculators" structuredData={structuredData}>
+  <div class="directory site-container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Calculators' }]} />
+    <header class="directory__header">
+      <span class="eyebrow">The calculator catalogue</span>
+      <h1>Clear tools for everyday money questions.</h1>
+      <p>Browse {liveCalculators.length} working calculators. Every tool shows the formula, assumptions and meaning behind the result.</p>
+    </header>
+
+    <div class="directory__categories">
+      {liveCategories.map((category, categoryIndex) => {
+        const categoryCalculators = getLiveCalculatorsByCategory(category.id);
+        return (
+          <section id={category.id} class="directory__category" aria-labelledby={`${category.id}-title`}>
+            <div class="directory__section-heading">
+              <div>
+                <span class="directory__category-index tabular-nums">0{categoryIndex + 1}</span>
+                <h2 id={`${category.id}-title`}>
+                  <a href={`/calculators/category/${category.id}`}>{category.title}</a>
+                </h2>
+                <p>{category.description}</p>
+              </div>
+              <span class="tabular-nums">{String(categoryCalculators.length).padStart(2, '0')} tools</span>
+            </div>
+            <div class="directory__grid">
+              {categoryCalculators.map((calculator, calculatorIndex) => (
+                <DirectoryCalculatorCard calculator={calculator} indexLabel={`0${categoryIndex + 1}.${calculatorIndex + 1}`} />
+              ))}
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .directory {
+    padding: 1rem 0 var(--pc-section-space);
+  }
+
+  .directory__header {
+    max-width: 53rem;
+    padding: clamp(3rem, 8vw, 6.5rem) 0;
+  }
+
+  .directory__header h1 {
+    margin: 1.25rem 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-variation-settings: 'opsz' 120, 'SOFT' 50;
+    font-weight: 520;
+    letter-spacing: -0.06em;
+    line-height: 0.94;
+  }
+
+  .directory__header p {
+    max-width: 45rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .directory__categories {
+    display: grid;
+    gap: var(--pc-section-space);
+  }
+
+  .directory__category {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--pc-border-strong);
+    scroll-margin-top: 2rem;
+  }
+
+  .directory__section-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .directory__category-index,
+  .directory__section-heading > span {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .directory__section-heading h2 {
+    margin: 0.5rem 0 0.35rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 540;
+    letter-spacing: -0.04em;
+  }
+
+  .directory__section-heading h2 a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    transition: color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .directory__section-heading h2 a:hover {
+    color: var(--pc-accent);
+  }
+
+  .directory__section-heading p {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--pc-muted);
+    font-size: 0.92rem;
+  }
+
+  .directory__grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 40rem) {
+    .directory__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .directory__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import LoanVariantCalculator from '../../components/calculator/react/calculators/LoanVariantCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('car-loan-emi');
+if (!definition) throw new Error('Car loan EMI calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Actual car loan repayments can differ because of lender charges, insurance, add-ons, payment timing and loan terms.">
+  <LoanVariantCalculator slot="calculator" variant="car" client:load />
+  <FormulaSection slot="formula" title="How car loan EMI is calculated" formula="Financed amount = Car amount − Down payment; EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)" description="The down payment is subtracted first. The standard reducing-balance EMI formula is then applied to the financed amount." variables={[
+    { symbol: 'P', meaning: 'Car amount after subtracting down payment.' }, { symbol: 'r', meaning: 'Monthly interest rate.' }, { symbol: 'n', meaning: 'Number of monthly payments.' }, { symbol: 'EMI', meaning: 'Estimated monthly loan payment.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'Down payment reduces the financed principal before EMI is calculated.',
+    'The entered rate is fixed for the full tenure and uses reducing-balance interest.',
+    'Processing fee is an upfront cost and is not financed in this estimate.',
+    'Insurance, registration, accessories, foreclosure and lender-specific charges are excluded.',
+  ]} />
+  <EducationSection slot="education" title="Understand car loan repayment" intro="The amount financed—not only the car price—determines monthly EMI and interest." items={[
+    { title: 'What is car loan EMI?', body: 'It is the monthly principal-and-interest payment on the financed portion of the car amount.' },
+    { title: 'Effect of down payment', body: 'A larger down payment lowers financed principal, which usually reduces EMI and total interest.' },
+    { title: 'Interest and tenure', body: 'Longer tenure can lower the monthly payment but leaves interest accruing for more months.' },
+  ]} />
+</CalculatorShell>

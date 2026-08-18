@@ -1,0 +1,76 @@
+---
+import type { CalculatorReference } from '../../data/calculatorReferences';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  reference: CalculatorReference;
+}
+
+const { reference } = Astro.props;
+---
+
+<aside class="reference-notice" aria-label="Rule and source information">
+  <Icon name="file-text" size={18} />
+  <div>
+    <strong>{reference.label}</strong>
+    <span>Reviewed {reference.reviewedDate}</span>
+  </div>
+  <a href={reference.sourceUrl} target="_blank" rel="noreferrer">
+    {reference.sourceLabel}
+    <Icon name="arrow-up-right" size={15} />
+  </a>
+</aside>
+
+<style>
+  .reference-notice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.75rem;
+    max-width: 53rem;
+    margin-bottom: 2rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-surface);
+    color: var(--pc-accent);
+  }
+
+  .reference-notice > div {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .reference-notice strong {
+    color: var(--pc-text);
+    font-size: 0.82rem;
+    font-weight: 650;
+  }
+
+  .reference-notice span {
+    color: var(--pc-muted);
+    font-size: 0.75rem;
+  }
+
+  .reference-notice a {
+    display: inline-flex;
+    min-height: 44px;
+    grid-column: 2;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--pc-accent);
+    font-size: 0.78rem;
+    font-weight: 650;
+  }
+
+  @media (min-width: 40rem) {
+    .reference-notice {
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+
+    .reference-notice a {
+      grid-column: auto;
+    }
+  }
+</style>

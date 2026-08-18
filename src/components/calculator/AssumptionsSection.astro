@@ -1,0 +1,75 @@
+---
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  items: readonly string[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="assumptions content-section" aria-labelledby="assumptions-title">
+  <div class="content-section__heading">
+    <span class="eyebrow">Read before using</span>
+    <h2 id="assumptions-title">Important assumptions</h2>
+    <p>These conditions define what the estimate means—and what it does not.</p>
+  </div>
+  <ul>
+    {items.map((item, index) => (
+      <li>
+        <span class="assumptions__number tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+        <p>{item}</p>
+        <Icon name="check" size={17} />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .assumptions {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .assumptions ul {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--pc-border-strong);
+    list-style: none;
+  }
+
+  .assumptions li {
+    display: grid;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: start;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .assumptions__number {
+    padding-top: 0.15rem;
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.72rem;
+  }
+
+  .assumptions li p {
+    margin: 0;
+    color: var(--pc-text);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .assumptions li :global(svg) {
+    margin-top: 0.15rem;
+    color: var(--pc-accent);
+  }
+
+  @media (min-width: 64rem) {
+    .assumptions {
+      grid-template-columns: minmax(0, 0.7fr) minmax(28rem, 1fr);
+      align-items: start;
+    }
+  }
+</style>

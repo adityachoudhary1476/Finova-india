@@ -1,0 +1,137 @@
+---
+import type { CalculatorItem } from '../../data/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  calculator: CalculatorItem;
+  index: number;
+}
+
+const { calculator, index } = Astro.props;
+const indexLabel = String(index + 1).padStart(2, '0');
+const isLive = calculator.availability === 'live';
+const href = isLive ? calculator.route : `#${calculator.id}`;
+---
+
+<a class="calculator-card" href={href} aria-label={isLive ? `Open ${calculator.name}` : `Find ${calculator.name} in the calculator catalogue`}>
+  <div class="calculator-card__top">
+    <span class="calculator-card__index tabular-nums">{indexLabel}</span>
+    <span class="calculator-card__icon"><Icon name={calculator.icon} size={21} /></span>
+  </div>
+  <div class="calculator-card__content">
+    <h3>{calculator.name}</h3>
+    <p>{calculator.description}</p>
+  </div>
+  <div class="calculator-card__footer">
+    <span>{isLive ? 'Open calculator' : 'Find in catalogue'}</span>
+    <Icon name="arrow-up-right" size={18} class="calculator-card__arrow" />
+  </div>
+</a>
+
+<style>
+  .calculator-card {
+    position: relative;
+    display: flex;
+    min-height: 17.5rem;
+    height: 100%;
+    flex-direction: column;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+    overflow: hidden;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+    transition: border-color var(--pc-duration-fast) var(--pc-ease), box-shadow var(--pc-duration-fast) var(--pc-ease), transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .calculator-card::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--pc-accent);
+    content: '';
+    transition: width var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .calculator-card:hover {
+    border-color: var(--pc-border-strong);
+    box-shadow: var(--pc-shadow-subtle);
+    transform: translateY(-2px);
+  }
+
+  .calculator-card:hover::after {
+    width: 100%;
+  }
+
+  .calculator-card__top,
+  .calculator-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .calculator-card__index {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .calculator-card__icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid #99f6e4;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .calculator-card__content {
+    margin-block: 2.5rem auto;
+  }
+
+  .calculator-card h3 {
+    margin-bottom: 0.75rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+    font-variation-settings: 'opsz' 42, 'SOFT' 50;
+    font-weight: 560;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+  }
+
+  .calculator-card p {
+    max-width: 31rem;
+    margin-bottom: 0;
+    color: var(--pc-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .calculator-card__footer {
+    padding-top: 1rem;
+    border-top: 1px solid var(--pc-border);
+    color: var(--pc-text);
+    font-size: 0.85rem;
+    font-weight: 630;
+    letter-spacing: 0.02em;
+  }
+
+  :global(.calculator-card__arrow) {
+    color: var(--pc-accent);
+    transition: transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .calculator-card:hover :global(.calculator-card__arrow) {
+    transform: translate(2px, -2px);
+  }
+
+  @media (min-width: 40rem) {
+    .calculator-card {
+      min-height: 19rem;
+    }
+  }
+</style>

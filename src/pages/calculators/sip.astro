@@ -1,0 +1,65 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import SipCalculator from '../../components/calculator/react/calculators/SipCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+
+const definition = calculatorBySlug.get('sip');
+if (!definition) throw new Error('SIP calculator metadata is missing.');
+
+const assumptions = [
+  'Each monthly contribution is assumed to be invested at the beginning of the month.',
+  'The annual return entered is converted to a monthly rate and stays constant in the illustration.',
+  'Market volatility, taxes, fees, expense ratios and missed contributions are not modelled.',
+  'Projected returns are estimates only. Actual investment values can rise or fall and are not guaranteed.',
+] as const;
+
+const education = [
+  {
+    title: 'What is a SIP?',
+    body: 'A Systematic Investment Plan is a way to invest a fixed amount at regular intervals. The calculator models monthly contributions; it does not evaluate or recommend any investment product.',
+  },
+  {
+    title: 'How SIP returns work',
+    body: 'Every contribution gets a different amount of time to grow. Earlier contributions compound for longer, while later ones spend fewer months in the projection.',
+  },
+  {
+    title: 'Why compounding matters',
+    body: 'If growth is positive, returns can begin generating additional returns. Over longer periods, this can widen the gap between the amount contributed and the estimated value.',
+  },
+  {
+    title: 'Why the result is an estimate',
+    body: 'Real market returns do not arrive at one fixed rate every month. The constant rate is a planning assumption that makes scenarios comparable, not a forecast or promise.',
+  },
+] as const;
+---
+
+<CalculatorShell
+  definition={definition}
+  disclaimer="SIP projections use a constant assumed return. Actual market returns vary and the final investment value may be higher or lower."
+>
+  <SipCalculator slot="calculator" client:load />
+
+  <FormulaSection
+    slot="formula"
+    title="How SIP future value is estimated"
+    formula="FV = P × [((1 + i)ⁿ − 1) ÷ i] × (1 + i)"
+    description="This future-value formula treats each contribution as being invested at the beginning of the month. When the expected return is zero, future value equals total contributions."
+    variables={[
+      { symbol: 'P', meaning: 'The amount invested every month.' },
+      { symbol: 'i', meaning: 'Monthly expected return: annual return ÷ 12 ÷ 100.' },
+      { symbol: 'n', meaning: 'Total number of monthly contributions.' },
+      { symbol: 'FV', meaning: 'Estimated value at the end of the selected period.' },
+    ]}
+  />
+
+  <AssumptionsSection slot="assumptions" items={assumptions} />
+  <EducationSection
+    slot="education"
+    title="Understand the SIP projection"
+    intro="Separate your own contributions from estimated growth so the final value is easier to interpret."
+    items={education}
+  />
+</CalculatorShell>

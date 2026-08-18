@@ -1,0 +1,66 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import CompoundInterestCalculator from '../../components/calculator/react/calculators/CompoundInterestCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+
+const definition = calculatorBySlug.get('compound-interest');
+if (!definition) throw new Error('Compound interest calculator metadata is missing.');
+
+const assumptions = [
+  'The principal remains invested for the full time period with no withdrawals or extra contributions.',
+  'The annual interest rate remains constant for the complete calculation.',
+  'Interest is added at the selected frequency: yearly, half-yearly, quarterly, monthly or daily.',
+  'Taxes, fees, inflation and product-specific rules are not included.',
+] as const;
+
+const education = [
+  {
+    title: 'What is compound interest?',
+    body: 'Compound interest is calculated on the starting principal and on interest already added to the balance. This “interest on interest” effect becomes more visible over time.',
+  },
+  {
+    title: 'Simple vs compound interest',
+    body: 'Simple interest is calculated only on the original principal. Compound interest repeatedly adds earned interest to the balance, so later calculations use a larger base.',
+  },
+  {
+    title: 'Effect of frequency',
+    body: 'At the same nominal annual rate, more frequent compounding usually produces a slightly higher final amount because interest is added back to the balance sooner.',
+  },
+  {
+    title: 'Time and compounding',
+    body: 'Compounding is not linear. Extending the period can have a larger effect in later years because each new period builds on all earlier accumulated growth.',
+  },
+] as const;
+---
+
+<CalculatorShell
+  definition={definition}
+  disclaimer="This result assumes a constant rate and uninterrupted compounding. Actual product returns, credited interest, fees and taxes may differ."
+>
+  <CompoundInterestCalculator slot="calculator" client:load />
+
+  <FormulaSection
+    slot="formula"
+    title="How compound interest is calculated"
+    formula="A = P × (1 + r ÷ n)⁽ⁿ × ᵗ⁾"
+    description="The formula repeatedly adds interest to the balance at the selected frequency. Interest earned is the final amount minus the original principal."
+    variables={[
+      { symbol: 'A', meaning: 'Final amount after compounding.' },
+      { symbol: 'P', meaning: 'Principal—the amount at the start.' },
+      { symbol: 'r', meaning: 'Annual interest rate written as a decimal.' },
+      { symbol: 'n', meaning: 'Number of compounding periods per year.' },
+      { symbol: 't', meaning: 'Time in years.' },
+    ]}
+  />
+
+  <AssumptionsSection slot="assumptions" items={assumptions} />
+  <EducationSection
+    slot="education"
+    title="Understand compounding"
+    intro="Time, rate and frequency work together. The chart helps make that relationship visible without hiding the formula."
+    items={education}
+  />
+</CalculatorShell>

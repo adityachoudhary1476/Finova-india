@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html><html lang="en-IN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="theme-color" content="#F5EFE2"><meta name="color-scheme" content="light"><meta name="description" content="Understand how EMI is calculated, why the interest share changes, and how rate, tenure and prepayments affect a loan."><meta name="robots" content="index, follow"><meta property="og:type" content="article"><meta property="og:locale" content="en_IN"><meta property="og:site_name" content="Finova"><meta property="og:title" content="How Does EMI Work? Principal, Interest and Amortisation | Finova"><meta property="og:description" content="Understand how EMI is calculated, why the interest share changes, and how rate, tenure and prepayments affect a loan."><meta property="og:image" content="https://finova.in/images/finova-og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://finova.in/guides/how-does-emi-work"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How Does EMI Work? Principal, Interest and Amortisation | Finova"><meta name="twitter:description" content="Understand how EMI is calculated, why the interest share changes, and how rate, tenure and prepayments affect a loan."><meta name="twitter:image" content="https://finova.in/images/finova-og.png"><link rel="canonical" href="https://finova.in/guides/how-does-emi-work"><link rel="icon" type="image/png" href="/images/finova-favicon.png"><link rel="apple-touch-icon" href="/images/finova-app-icon.png"><link rel="manifest" href="/manifest.json"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"How Does EMI Actually Work?","description":"Understand how EMI is calculated, why the interest share changes, and how rate, tenure and prepayments affect a loan.","dateModified":"2026-08-17","url":"https://finova.in/guides/how-does-emi-work","inLanguage":"en-IN","mainEntityOfPage":"https://finova.in/guides/how-does-emi-work"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is EMI the same as total loan cost?","acceptedAnswer":{"@type":"Answer","text":"No. EMI is the monthly payment. Total loan cost also depends on the number of payments, total interest, processing fees and any other lender charges."}},{"@type":"Question","name":"Why can a lender quote differ from a calculator?","acceptedAnswer":{"@type":"Answer","text":"Payment dates, daily interest conventions, rounding, fees, insurance and floating-rate resets can create differences."}},{"@type":"Question","name":"Does a lower EMI always mean a cheaper loan?","acceptedAnswer":{"@type":"Answer","text":"No. A lower EMI caused by a longer tenure can lead to more total interest even though the monthly payment is easier to manage."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://finova.in/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://finova.in/guides"},{"@type":"ListItem","position":3,"name":"How Does EMI Actually Work?","item":"https://finova.in/guides/how-does-emi-work"}]}]}</script><title>How Does EMI Work? Principal, Interest and Amortisation | Finova</title><style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/node_modules/@fontsource-variable/fraunces/wght.css">/* fraunces-vietnamese-wght-normal */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/fraunces/files/fraunces-vietnamese-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+
+/* fraunces-latin-ext-wght-normal */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-ext-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* fraunces-latin-wght-normal */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/node_modules/@fontsource-variable/public-sans/wght.css">/* public-sans-vietnamese-wght-normal */
+@font-face {
+  font-family: 'Public Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/public-sans/files/public-sans-vietnamese-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
+}
+
+/* public-sans-latin-ext-wght-normal */
+@font-face {
+  font-family: 'Public Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/public-sans/files/public-sans-latin-ext-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* public-sans-latin-wght-normal */
+@font-face {
+  font-family: 'Public Sans Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(/node_modules/@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/styles/global.css">/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring:where(:not(iframe)) {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    line-height: 1;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .visible {
+    visibility: visible;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .fixed {
+    position: fixed;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .table {
+    display: table;
+  }
+  .flex-shrink {
+    flex-shrink: 1;
+  }
+  .grow {
+    flex-grow: 1;
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .tabular-nums {
+    --tw-numeric-spacing: tabular-nums;
+    font-variant-numeric: var(--tw-ordinal,) var(--tw-slashed-zero,) var(--tw-numeric-figure,) var(--tw-numeric-spacing,) var(--tw-numeric-fraction,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+}
+:root {
+  --pc-canvas: #F5EFE2;
+  --pc-surface: #FFFFFF;
+  --pc-ink: #123B2C;
+  --pc-text: #433E38;
+  --pc-muted: #736C63;
+  --pc-border: #DDD5C8;
+  --pc-border-strong: #C9C0B2;
+  --pc-accent: #C4622D;
+  --pc-accent-hover: #B35529;
+  --pc-accent-light: #F5EFE2;
+  --pc-accent-wash: #FFF0E8;
+  --pc-warm: #C4622D;
+  --pc-warm-dark: #AD4028;
+  --pc-warm-light: #F2D5CB;
+  --pc-error: #B91C1C;
+  --pc-font-display: 'Fraunces Variable', Georgia, serif;
+  --pc-font-body: 'Public Sans Variable', 'Public Sans', system-ui, sans-serif;
+  --pc-font-mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --pc-text-xs: 0.75rem;
+  --pc-text-sm: 0.875rem;
+  --pc-text-base: 1rem;
+  --pc-text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --pc-text-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --pc-text-2xl: clamp(1.75rem, 1.35rem + 1.25vw, 2.5rem);
+  --pc-text-display: clamp(3.25rem, 2.15rem + 5vw, 7.25rem);
+  --pc-space-1: 0.25rem;
+  --pc-space-2: 0.5rem;
+  --pc-space-3: 0.75rem;
+  --pc-space-4: 1rem;
+  --pc-space-5: 1.25rem;
+  --pc-space-6: 1.5rem;
+  --pc-space-8: 2rem;
+  --pc-space-10: 2.5rem;
+  --pc-space-12: 3rem;
+  --pc-space-16: 4rem;
+  --pc-space-20: 5rem;
+  --pc-space-24: 6rem;
+  --pc-section-space: clamp(5rem, 10vw, 9rem);
+  --pc-footer-bg: #0F3029;
+  --pc-footer-text: #F5EFE2;
+  --pc-footer-muted: #A7C0B8;
+  --pc-footer-link: #E5EBE8;
+  --pc-header-bg: rgb(250 250 249 / 0.98);
+  --pc-og-image: /images/finova-og.png;
+  --pc-radius-sm: 0.25rem;
+  --pc-radius-md: 0.5rem;
+  --pc-radius-lg: 0.75rem;
+  --pc-border-width: 1px;
+  --pc-shadow-subtle: 0 1px 2px rgb(20 17 15 / 0.035), 0 10px 24px rgb(20 17 15 / 0.03);
+  --pc-shadow-raised: 0 2px 4px rgb(20 17 15 / 0.04), 0 18px 42px rgb(20 17 15 / 0.065);
+  --pc-focus-ring: 0 0 0 3px rgb(23 72 60 / 0.22);
+  --pc-container: 76rem;
+  --pc-gutter: clamp(1.125rem, 4vw, 2rem);
+  --pc-duration-fast: 170ms;
+  --pc-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html {
+    background: var(--pc-canvas);
+    color: var(--pc-ink);
+    font-family: var(--pc-font-body);
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    margin: 0;
+    min-width: 20rem;
+    background: linear-gradient(to right, transparent calc(50% - 0.5px), rgb(231 229 228 / 0.22) 50%, transparent calc(50% + 0.5px)) top center / min(100% - 2.25rem, 76rem) 100% no-repeat, var(--pc-canvas);
+    color: var(--pc-text);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3, p {
+    margin-block-start: 0;
+  }
+  h1, h2, h3 {
+    color: var(--pc-ink);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button, input {
+    font: inherit;
+  }
+  button {
+    color: inherit;
+  }
+  ::selection {
+    background: var(--pc-accent-light);
+    color: var(--pc-ink);
+  }
+  :focus-visible {
+    border-radius: var(--pc-radius-sm);
+    outline: 2px solid var(--pc-accent);
+    outline-offset: 3px;
+  }
+}
+@layer components {
+  .site-container {
+    width: min(100% - (var(--pc-gutter) * 2), var(--pc-container));
+    margin-inline: auto;
+  }
+  .section-shell {
+    padding-block: var(--pc-section-space);
+  }
+  .section-rule {
+    border-top: 1px solid var(--pc-border);
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--pc-accent);
+    font-size: 0.78rem;
+    font-weight: 680;
+    letter-spacing: 0.14em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+  .eyebrow::before {
+    width: 1.5rem;
+    height: 1px;
+    background: currentColor;
+    content: '';
+  }
+  .content-section {
+    scroll-margin-top: 2rem;
+  }
+  .content-section__heading {
+    max-width: 42rem;
+    margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  }
+  .content-section__heading h2 {
+    margin: 1rem 0 0.75rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-variation-settings: 'opsz' 72, 'SOFT' 50;
+    font-weight: 520;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+  .content-section__heading p {
+    margin: 0;
+    color: var(--pc-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-ordinal {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-slashed-zero {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-figure {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-spacing {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-numeric-fraction {
+  syntax: "*";
+  inherits: false;
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-border-style: solid;
+      --tw-ordinal: initial;
+      --tw-slashed-zero: initial;
+      --tw-numeric-figure: initial;
+      --tw-numeric-spacing: initial;
+      --tw-numeric-fraction: initial;
+    }
+  }
+}
+</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Brand.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.brand[data-astro-cid-52dtfbou]{display:inline-flex;align-items:center;min-height:3rem;padding-top:0.5rem;padding-bottom:0}.brand__logo[data-astro-cid-52dtfbou]{flex-shrink:0;display:block;height:2.75rem;width:auto;object-fit:contain}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.site-header[data-astro-cid-pux6a34n]{position:relative;z-index:50;border-bottom:1px solid var(--pc-border);background:var(--pc-header-bg)}.site-header__inner[data-astro-cid-pux6a34n]{display:flex;min-height:4.75rem;align-items:center;justify-content:space-between;gap:1.5rem}.desktop-nav[data-astro-cid-pux6a34n]{display:none}.desktop-nav[data-astro-cid-pux6a34n] ul[data-astro-cid-pux6a34n]{display:flex;align-items:center;gap:0.25rem;margin:0;padding:0;list-style:none}.desktop-nav[data-astro-cid-pux6a34n] a[data-astro-cid-pux6a34n]{display:flex;min-height:44px;align-items:center;padding:0.5rem 0.9rem;color:var(--pc-text);font-size:0.83rem;font-weight:560;transition:color var(--pc-duration-fast) var(--pc-ease)}.desktop-nav[data-astro-cid-pux6a34n] a[data-astro-cid-pux6a34n]:hover{color:var(--pc-accent)}.site-header__actions[data-astro-cid-pux6a34n]{display:flex;align-items:center;gap:0.35rem}.search-link[data-astro-cid-pux6a34n],.mobile-nav[data-astro-cid-pux6a34n] summary[data-astro-cid-pux6a34n]{display:flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;gap:0.5rem;border:1px solid var(--pc-border);border-radius:0;background:transparent;color:var(--pc-text);cursor:pointer;font-size:0.78rem;font-weight:600;transition:border-color var(--pc-duration-fast) var(--pc-ease),color var(--pc-duration-fast) var(--pc-ease)}.search-link[data-astro-cid-pux6a34n]:hover,.mobile-nav[data-astro-cid-pux6a34n] summary[data-astro-cid-pux6a34n]:hover{border-color:var(--pc-accent);color:var(--pc-accent)}.search-link[data-astro-cid-pux6a34n]>span[data-astro-cid-pux6a34n],.search-link[data-astro-cid-pux6a34n] kbd[data-astro-cid-pux6a34n]{display:none}.search-link[data-astro-cid-pux6a34n] kbd[data-astro-cid-pux6a34n]{width:1.5rem;height:1.5rem;place-items:center;border:1px solid var(--pc-border);border-radius:0.25rem;color:var(--pc-muted);font-family:var(--pc-font-mono);font-size:0.62rem}.mobile-nav[data-astro-cid-pux6a34n] summary[data-astro-cid-pux6a34n]{padding:0.5rem 0.7rem;list-style:none}.mobile-nav[data-astro-cid-pux6a34n] summary[data-astro-cid-pux6a34n]::-webkit-details-marker{display:none}.mobile-nav[data-astro-cid-pux6a34n] summary[data-astro-cid-pux6a34n] span[data-astro-cid-pux6a34n]{display:none}.mobile-nav[data-astro-cid-pux6a34n] nav[data-astro-cid-pux6a34n]{position:absolute;top:calc(100% + 1px);right:0;left:0;padding:0.75rem var(--pc-gutter) 1.25rem;border-bottom:1px solid var(--pc-border-strong);background:var(--pc-canvas);box-shadow:var(--pc-shadow-raised)}.mobile-nav[data-astro-cid-pux6a34n] ul[data-astro-cid-pux6a34n]{width:min(100%,var(--pc-container));margin:0 auto;padding:0;list-style:none}.mobile-nav[data-astro-cid-pux6a34n] li[data-astro-cid-pux6a34n]+li[data-astro-cid-pux6a34n]{border-top:1px solid var(--pc-border)}.mobile-nav[data-astro-cid-pux6a34n] a[data-astro-cid-pux6a34n]{display:grid;min-height:4rem;grid-template-columns:2rem 1fr auto;align-items:center;gap:0.75rem;color:var(--pc-ink);font-family:var(--pc-font-display);font-size:1.35rem;font-weight:520}.mobile-nav[data-astro-cid-pux6a34n] a[data-astro-cid-pux6a34n] svg{color:var(--pc-accent)}.mobile-nav__index[data-astro-cid-pux6a34n]{color:var(--pc-muted);font-family:var(--pc-font-mono);font-size:0.65rem}@media (min-width: 48rem){.desktop-nav[data-astro-cid-pux6a34n]{display:block;margin-left:auto;margin-right:clamp(1rem,4vw,3rem)}.search-link[data-astro-cid-pux6a34n]{padding-inline:0.8rem}.search-link[data-astro-cid-pux6a34n]>span[data-astro-cid-pux6a34n]{display:inline}.search-link[data-astro-cid-pux6a34n] kbd[data-astro-cid-pux6a34n]{display:grid}.mobile-nav[data-astro-cid-pux6a34n]{display:none}}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.site-footer[data-astro-cid-sz7xmlte]{padding:clamp(4.5rem,9vw,7rem) 0 1.5rem;border-top:1px solid rgb(246 241 231 / 0.2);background:var(--pc-footer-bg);color:var(--pc-footer-text)}.site-footer__main[data-astro-cid-sz7xmlte]{display:grid;gap:4rem}.site-footer__brand[data-astro-cid-sz7xmlte] p[data-astro-cid-sz7xmlte]{max-width:11ch;margin:1.75rem 0 0.65rem;color:var(--pc-footer-text);font-family:var(--pc-font-display);font-size:clamp(2rem,5vw,3.5rem);font-variation-settings:"opsz" 72,"SOFT" 42;font-weight:500;letter-spacing:-0.055em;line-height:0.95}.site-footer__brand[data-astro-cid-sz7xmlte]>span[data-astro-cid-sz7xmlte]{color:var(--pc-footer-muted);font-size:0.82rem}.site-footer__links[data-astro-cid-sz7xmlte]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1.5rem}.site-footer__links[data-astro-cid-sz7xmlte] h2[data-astro-cid-sz7xmlte]{margin-bottom:1rem;color:var(--pc-footer-muted);font-family:var(--pc-font-mono);font-size:0.68rem;font-weight:650;letter-spacing:0.11em;text-transform:uppercase}.site-footer__links[data-astro-cid-sz7xmlte] ul[data-astro-cid-sz7xmlte]{display:grid;gap:0.2rem;margin:0;padding:0;list-style:none}.site-footer__links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{display:inline-flex;min-width:2.75rem;min-height:2.75rem;align-items:center;color:var(--pc-footer-link);font-size:0.85rem;transition:color var(--pc-duration-fast) var(--pc-ease)}.site-footer__links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:var(--pc-warm)}.site-footer[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:focus-visible{outline-color:var(--pc-warm)}.site-footer__bottom[data-astro-cid-sz7xmlte]{display:flex;flex-direction:column;gap:0.5rem;margin-top:4.5rem}.site-footer__bottom[data-astro-cid-sz7xmlte] p[data-astro-cid-sz7xmlte]{margin:0;color:var(--pc-footer-muted);font-size:0.75rem}.site-footer__bottom[data-astro-cid-sz7xmlte] span[data-astro-cid-sz7xmlte]{margin-right:0.2rem;color:var(--pc-warm);font-family:var(--pc-font-display);font-weight:600}@media (min-width: 48rem){.site-footer__main[data-astro-cid-sz7xmlte]{grid-template-columns:minmax(17rem,0.8fr) minmax(0,1.2fr);align-items:start;gap:clamp(3rem,7vw,7rem)}.site-footer__links[data-astro-cid-sz7xmlte]{grid-template-columns:repeat(4,minmax(0,1fr))}.site-footer__bottom[data-astro-cid-sz7xmlte]{flex-direction:row;justify-content:space-between;align-items:center}}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/layouts/BaseLayout.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-ink);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 650;
+    transform: translateY(-160%);
+    transition: transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .skip-link:focus {
+    outline-color: var(--pc-warm);
+    transform: translateY(0);
+  }</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.breadcrumbs[data-astro-cid-a535bz7v] ol[data-astro-cid-a535bz7v]{display:flex;flex-wrap:wrap;align-items:center;gap:0.45rem;margin:0;padding:0;list-style:none}.breadcrumbs[data-astro-cid-a535bz7v] li[data-astro-cid-a535bz7v]{display:flex;align-items:center;gap:0.45rem;color:var(--pc-muted);font-size:0.78rem}.breadcrumbs[data-astro-cid-a535bz7v] a[data-astro-cid-a535bz7v]{display:inline-flex;min-height:44px;align-items:center;color:var(--pc-text);font-weight:570;transition:color var(--pc-duration-fast) var(--pc-ease)}.breadcrumbs[data-astro-cid-a535bz7v] a[data-astro-cid-a535bz7v]:hover{color:var(--pc-accent)}.breadcrumbs__separator[data-astro-cid-a535bz7v]{color:var(--pc-border-strong);font-family:var(--pc-font-mono)}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.related__grid[data-astro-cid-kpfp2etw]{display:grid;gap:0.65rem}.related__grid[data-astro-cid-kpfp2etw]>a[data-astro-cid-kpfp2etw],.related__grid[data-astro-cid-kpfp2etw]>article[data-astro-cid-kpfp2etw]{display:grid;min-height:8.75rem;grid-template-columns:auto 1fr auto;align-items:start;gap:1rem;padding:1.25rem;border:1px solid var(--pc-border);border-radius:var(--pc-radius-lg);background:var(--pc-surface)}.related__grid[data-astro-cid-kpfp2etw]>a[data-astro-cid-kpfp2etw]{transition:border-color var(--pc-duration-fast) var(--pc-ease),transform var(--pc-duration-fast) var(--pc-ease)}.related__grid[data-astro-cid-kpfp2etw]>a[data-astro-cid-kpfp2etw]:hover{border-color:var(--pc-accent);transform:translateY(-2px)}.related__grid[data-astro-cid-kpfp2etw]>article[data-astro-cid-kpfp2etw]{background:rgb(255 255 255 / 0.55)}.related__icon[data-astro-cid-kpfp2etw]{display:grid;width:2.5rem;height:2.5rem;place-items:center;border:1px solid #99f6e4;border-radius:var(--pc-radius-md);background:var(--pc-accent-wash);color:var(--pc-accent)}.related[data-astro-cid-kpfp2etw] h3[data-astro-cid-kpfp2etw]{margin:0 0 0.35rem;font-family:var(--pc-font-display);font-size:1.2rem;font-weight:560}.related__grid[data-astro-cid-kpfp2etw] p[data-astro-cid-kpfp2etw]{margin:0;color:var(--pc-muted);font-size:0.85rem;line-height:1.5}.related__arrow[data-astro-cid-kpfp2etw]{color:var(--pc-accent)}.related__status[data-astro-cid-kpfp2etw]{color:var(--pc-muted);font-size:0.72rem;font-weight:650;letter-spacing:0.05em;text-transform:uppercase;white-space:nowrap}.related__all[data-astro-cid-kpfp2etw]{display:inline-flex;min-height:44px;align-items:center;gap:0.5rem;margin-top:1.25rem;color:var(--pc-accent);font-size:0.85rem;font-weight:650}@media (min-width: 64rem){.related__grid[data-astro-cid-kpfp2etw]{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro?astro&#38;type=style&#38;index=0&#38;lang.css">.faq-section[data-astro-cid-glf45edw]{display:grid;gap:2rem;padding-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--pc-border-strong)}.faq-section[data-astro-cid-glf45edw] h2[data-astro-cid-glf45edw]{max-width:16ch;margin:1rem 0 0;font-family:var(--pc-font-display);font-size:clamp(2rem,4vw,3rem);font-weight:540;letter-spacing:-0.04em;line-height:1.04}.faq-section__items[data-astro-cid-glf45edw]{border-top:1px solid var(--pc-border-strong)}.faq-section[data-astro-cid-glf45edw] details[data-astro-cid-glf45edw]{border-bottom:1px solid var(--pc-border-strong)}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw]{display:grid;min-height:4.5rem;grid-template-columns:2rem 1fr auto;align-items:center;gap:0.75rem;padding:0.75rem 0;cursor:pointer;list-style:none}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw]::-webkit-details-marker{display:none}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw]>span[data-astro-cid-glf45edw]{color:var(--pc-muted);font-family:var(--pc-font-mono);font-size:0.62rem}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw] strong[data-astro-cid-glf45edw]{color:var(--pc-ink);font-size:0.84rem;font-weight:630}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw] i[data-astro-cid-glf45edw]{position:relative;width:1rem;height:1rem}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw] i[data-astro-cid-glf45edw]::before,.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw] i[data-astro-cid-glf45edw]::after{position:absolute;top:50%;left:50%;width:0.8rem;height:1px;background:var(--pc-accent);content:"";transform:translate(-50%,-50%)}.faq-section[data-astro-cid-glf45edw] summary[data-astro-cid-glf45edw] i[data-astro-cid-glf45edw]::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform var(--pc-duration-fast) var(--pc-ease)}.faq-section[data-astro-cid-glf45edw] details[data-astro-cid-glf45edw][open] summary[data-astro-cid-glf45edw] i[data-astro-cid-glf45edw]::after{transform:translate(-50%,-50%) rotate(0deg)}.faq-section[data-astro-cid-glf45edw] details[data-astro-cid-glf45edw] p[data-astro-cid-glf45edw]{max-width:48rem;margin:0;padding:0 0 1.5rem 2.75rem;color:var(--pc-text);font-size:0.84rem;line-height:1.7}@media (min-width: 64rem){.faq-section[data-astro-cid-glf45edw]{grid-template-columns:minmax(18rem,0.7fr) minmax(0,1fr);align-items:start}}</style>
+<style data-vite-dev-id="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro?astro&#38;type=style&#38;index=0&#38;lang.css">.guide-page[data-astro-cid-2u677oxp]{padding:1rem 0 var(--pc-section-space)}.guide-page__header[data-astro-cid-2u677oxp]{max-width:62rem;padding:clamp(3rem,8vw,7rem) 0}.guide-page[data-astro-cid-2u677oxp] h1[data-astro-cid-2u677oxp]{margin:1.25rem 0 1.25rem;font-family:var(--pc-font-display);font-size:clamp(3rem,8vw,6.75rem);font-weight:520;letter-spacing:-0.06em;line-height:0.94}.guide-page__header[data-astro-cid-2u677oxp]>p[data-astro-cid-2u677oxp]{max-width:46rem;margin:0;color:var(--pc-text);font-size:var(--pc-text-lg)}.guide-page__meta[data-astro-cid-2u677oxp]{display:flex;flex-wrap:wrap;gap:0.5rem 1rem;margin-top:1.5rem}.guide-page__meta[data-astro-cid-2u677oxp] span[data-astro-cid-2u677oxp]{display:inline-flex;min-height:2rem;align-items:center;gap:0.4rem;color:var(--pc-muted);font-size:0.7rem}.guide-page__meta[data-astro-cid-2u677oxp] svg{color:var(--pc-accent)}.guide-page__body[data-astro-cid-2u677oxp]{display:grid;gap:2.5rem;padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--pc-border-strong)}.guide-page__contents[data-astro-cid-2u677oxp]{align-self:start;padding:1.25rem;border:1px solid var(--pc-border);border-radius:var(--pc-radius-md);background:var(--pc-surface)}.guide-page__contents[data-astro-cid-2u677oxp]>strong[data-astro-cid-2u677oxp]{color:var(--pc-muted);font-size:0.66rem;letter-spacing:0.09em;text-transform:uppercase}.guide-page__contents[data-astro-cid-2u677oxp] ol[data-astro-cid-2u677oxp]{display:grid;gap:0.25rem;margin:1rem 0 0;padding-left:1.15rem}.guide-page__contents[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp]{display:inline-flex;min-height:2.75rem;align-items:center;color:var(--pc-text);font-size:0.76rem;transition:color var(--pc-duration-fast) var(--pc-ease)}.guide-page__contents[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp]:hover{color:var(--pc-accent)}.guide-page__article[data-astro-cid-2u677oxp]{min-width:0}.guide-page__article[data-astro-cid-2u677oxp] section[data-astro-cid-2u677oxp]{max-width:48rem;padding-bottom:clamp(2.5rem,6vw,4.5rem);scroll-margin-top:2rem}.guide-page__section-number[data-astro-cid-2u677oxp]{color:var(--pc-accent);font-family:var(--pc-font-mono);font-size:0.65rem}.guide-page__article[data-astro-cid-2u677oxp] h2[data-astro-cid-2u677oxp],.guide-page__related[data-astro-cid-2u677oxp] h2[data-astro-cid-2u677oxp]{margin:0.7rem 0 1.25rem;font-family:var(--pc-font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:540;letter-spacing:-0.045em;line-height:1.04}.guide-page__article[data-astro-cid-2u677oxp] p[data-astro-cid-2u677oxp],.guide-page__article[data-astro-cid-2u677oxp] li[data-astro-cid-2u677oxp]{color:var(--pc-text);font-size:clamp(0.95rem,1.5vw,1.05rem);line-height:1.8}.guide-page__article[data-astro-cid-2u677oxp] p[data-astro-cid-2u677oxp]{margin-bottom:1.1rem}.guide-page__article[data-astro-cid-2u677oxp] ul[data-astro-cid-2u677oxp]{display:grid;gap:0.65rem;padding-left:1.25rem}.guide-page__article[data-astro-cid-2u677oxp] li[data-astro-cid-2u677oxp]::marker{color:var(--pc-accent)}.guide-page__note[data-astro-cid-2u677oxp]{display:grid;max-width:48rem;grid-template-columns:auto 1fr;gap:0.75rem;padding:1.1rem;border:1px solid var(--pc-border);border-radius:var(--pc-radius-md);background:var(--pc-accent-wash);color:var(--pc-accent)}.guide-page__note[data-astro-cid-2u677oxp] p[data-astro-cid-2u677oxp]{margin:0;font-size:0.76rem;line-height:1.6}.guide-page[data-astro-cid-2u677oxp] .faq-section,.guide-page[data-astro-cid-2u677oxp] .related{margin-top:var(--pc-section-space)}.guide-page__related[data-astro-cid-2u677oxp]{display:grid;gap:2rem;margin-top:var(--pc-section-space);padding-top:clamp(3rem,7vw,5rem);border-top:1px solid var(--pc-border-strong)}.guide-page__related[data-astro-cid-2u677oxp] h2[data-astro-cid-2u677oxp]{margin-top:1rem}.guide-page__related[data-astro-cid-2u677oxp] ul[data-astro-cid-2u677oxp]{margin:0;padding:0;border-top:1px solid var(--pc-border);list-style:none}.guide-page__related[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp]{display:grid;min-height:5rem;grid-template-columns:minmax(5rem,0.25fr) 1fr auto;align-items:center;gap:1rem;border-bottom:1px solid var(--pc-border)}.guide-page__related[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp] span[data-astro-cid-2u677oxp]{color:var(--pc-accent);font-size:0.66rem;font-weight:680;text-transform:uppercase}.guide-page__related[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp] strong[data-astro-cid-2u677oxp]{color:var(--pc-ink);font-size:0.82rem;font-weight:620}.guide-page__related[data-astro-cid-2u677oxp] a[data-astro-cid-2u677oxp] svg{color:var(--pc-accent)}@media (min-width: 64rem){.guide-page__body[data-astro-cid-2u677oxp]{grid-template-columns:minmax(13rem,0.34fr) minmax(0,1fr);gap:clamp(3rem,7vw,7rem)}.guide-page__contents[data-astro-cid-2u677oxp]{position:sticky;top:1.5rem}.guide-page__related[data-astro-cid-2u677oxp]{grid-template-columns:minmax(18rem,0.7fr) minmax(0,1fr);align-items:start}}</style><script type="module" src="/@vite/client"></script>
+<script type="module" src="/@fs/C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js?v=ab4015b5"></script>
+<script>window.__astro_dev_toolbar__ = {"root":"C:\\Users\\Owner\\OneDrive\\Desktop\\FINOVA FINAL\\","version":"5.18.2","latestAstroVersion":"7.2.2","debugInfo":"Astro                    v5.18.2\nNode                     v24.19.0\nSystem                   Windows (x64)\nPackage Manager          npm\nOutput                   static\nAdapter                  none\nIntegrations             @astrojs/react\n                         @astrojs/sitemap"}</script>
+<script type="module" src="/node_modules/@fontsource-variable/fraunces/wght.css"></script>
+<script type="module" src="/node_modules/@fontsource-variable/public-sans/wght.css"></script>
+<script type="module" src="/src/styles/global.css"></script>
+<script type="module" src="/src/components/ui/Brand.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/Navigation.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/Footer.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/layouts/BaseLayout.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/calculator/Breadcrumbs.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/calculator/RelatedCalculators.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/components/content/FaqSection.astro?astro&type=style&index=0&lang.css"></script>
+<script type="module" src="/src/pages/guides/[slug].astro?astro&type=style&index=0&lang.css"></script></head> <body data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/layouts/BaseLayout.astro" data-astro-source-loc="64:9"> <a class="skip-link" href="#main-content" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/layouts/BaseLayout.astro" data-astro-source-loc="65:47">Skip to main content</a> <header class="site-header" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="12:29"> <div class="site-container site-header__inner" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="13:50"> <a class="brand" href="/" aria-label="finova" data-astro-cid-52dtfbou data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Brand.astro" data-astro-source-loc="7:47"> <img class="brand__logo" src="/images/finova-header.png" alt="" width="751" height="158" loading="eager" decoding="async" aria-hidden="true" data-astro-cid-52dtfbou data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Brand.astro" data-astro-source-loc="8:4"> </a>  <nav class="desktop-nav" aria-label="Primary navigation" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="16:62"> <ul data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="17:11"> <li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:35"><a href="/calculators" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:54">Calculators</a></li><li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:35"><a href="/guides" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:54">Guides</a></li><li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:35"><a href="/about" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="18:54">About</a></li> </ul> </nav> <div class="site-header__actions" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="22:39"> <a class="search-link" href="/#calculator-search" aria-label="Search calculators" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="23:89"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">                    <circle cx="11" cy="11" r="7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="48:28"></circle><path d="m20 20-4-4" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="48:60"></path>      </svg> <span data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="25:15">Search</span> <kbd data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="26:14">/</kbd> </a> <details class="mobile-nav" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="29:35"> <summary aria-label="Open navigation menu" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="30:52"> <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">               <path d="M4 7h16M4 12h16M4 17h16" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="43:26"></path>           </svg> <span data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="32:17">Menu</span> </summary> <nav aria-label="Mobile navigation" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="34:45"> <ul data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="35:15"> <li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="37:19"> <a href="/calculators" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="38:37"> <span class="mobile-nav__index tabular-nums" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="39:64">01</span> <span data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="40:25">Calculators</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </li><li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="37:19"> <a href="/guides" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="38:37"> <span class="mobile-nav__index tabular-nums" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="39:64">02</span> <span data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="40:25">Guides</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </li><li data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="37:19"> <a href="/about" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="38:37"> <span class="mobile-nav__index tabular-nums" data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="39:64">03</span> <span data-astro-cid-pux6a34n data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Navigation.astro" data-astro-source-loc="40:25">About</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </li> </ul> </nav> </details> </div> </div> </header>  <main id="main-content" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/layouts/BaseLayout.astro" data-astro-source-loc="67:29">  <article class="guide-page site-container" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="73:46"> <nav class="breadcrumbs" aria-label="Breadcrumb" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="14:50"> <ol data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="15:7"> <li data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="17:11"> <a href="/" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="18:42">Home</a> <span class="breadcrumbs__separator" aria-hidden="true" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="19:94">/</span> </li><li data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="17:11"> <a href="/guides" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="18:42">Guides</a> <span class="breadcrumbs__separator" aria-hidden="true" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="19:94">/</span> </li><li data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="17:11"> <span aria-current="page" data-astro-cid-a535bz7v data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/Breadcrumbs.astro" data-astro-source-loc="18:87">How Does EMI Actually Work?</span>  </li> </ol> </nav>  <header class="guide-page__header" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="80:40"> <span class="eyebrow" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="81:29">Loans guide</span> <h1 data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="82:11">How Does EMI Actually Work?</h1> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="83:10">Principal, reducing balance and interestâexplained without the banking jargon.</p> <div class="guide-page__meta" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="84:37"> <span data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="85:16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">       <circle cx="12" cy="12" r="9" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="35:27"></circle><path d="M12 7v5l3 2" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="35:59"></path>                   </svg> 6 min read</span> <span data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="86:16"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="38:31"></path><path d="M14 2v6h6M8 13h8M8 17h6" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="38:102"></path>                </svg> Last updated 17 August 2026</span> </div> </header> <div class="guide-page__body" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="90:35"> <aside class="guide-page__contents" aria-label="On this page" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="91:69"> <strong data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="92:17">On this page</strong> <ol data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="93:13"> <li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:18"><a href="#section-1" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:51">EMI in one sentence</a></li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:18"><a href="#section-2" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:51">Why early EMIs contain more interest</a></li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:18"><a href="#section-3" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:51">What changes the EMI or total cost?</a></li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:18"><a href="#section-4" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="95:51">Where prepayments fit</a></li> </ol> </aside> <div class="guide-page__article" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="100:40"> <section id="section-1" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="102:48"> <span class="guide-page__section-number tabular-nums" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="103:67">01</span> <h2 data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="104:17">EMI in one sentence</h2> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">An equated monthly instalment is a scheduled payment that repays part of a loan principal and pays interest on the outstanding balance. If the rate and tenure stay fixed, the EMI normally stays the same while its internal principal-and-interest split changes.</p><p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">The lender is not charging the full-loan interest every month. Interest is calculated on the balance still unpaid, which is why a reducing-balance schedule matters.</p>  </section><section id="section-2" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="102:48"> <span class="guide-page__section-number tabular-nums" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="103:67">02</span> <h2 data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="104:17">Why early EMIs contain more interest</h2> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">At the start of a loan, the outstanding principal is at its highest. The first monthâs interest is therefore larger. After each payment reduces the principal, the next monthâs interest is calculated on a slightly smaller balance.</p><p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">Over time, more of the same EMI goes toward principal. An amortisation schedule makes that change visible year by year.</p>  </section><section id="section-3" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="102:48"> <span class="guide-page__section-number tabular-nums" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="103:67">03</span> <h2 data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="104:17">What changes the EMI or total cost?</h2> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">Three inputs drive the standard reducing-balance calculation.</p> <ul data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="107:19"> <li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="108:54">Principal: borrowing more raises the EMI and total interest.</li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="108:54">Interest rate: a higher rate increases the cost of every remaining instalment.</li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="108:54">Tenure: a longer tenure can reduce the monthly EMI but may increase total interest because the balance remains outstanding for longer.</li> </ul> </section><section id="section-4" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="102:48"> <span class="guide-page__section-number tabular-nums" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="103:67">04</span> <h2 data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="104:17">Where prepayments fit</h2> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">A prepayment reduces the outstanding principal earlier than scheduled. Future interest is then calculated on a smaller balance. Depending on the lender, a prepayment may reduce the tenure, reduce the EMI, or allow a choice between the two.</p><p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="105:55">Always check the loan agreement for prepayment charges and the lenderâs method. A general EMI calculator does not model every lender-specific rule.</p>  </section> <div class="guide-page__note" role="note" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="114:51"> <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">                     <path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="49:28"></path><path d="m9 12 2 2 4-4" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="49:87"></path>     </svg> <p data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="116:14">This guide is educational. It explains calculator concepts and does not recommend a financial product or replace professional advice.</p> </div> </div> </div> <section class="faq-section" aria-labelledby="faq-title" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="12:58"> <header data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="13:11"> <span class="eyebrow" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="14:27">Questions, answered</span> <h2 id="faq-title" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="15:24">Frequently asked questions</h2> </header> <div class="faq-section__items" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="17:35"> <details data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="19:16"> <summary data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="20:18"> <span class="tabular-nums" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="21:38">01</span> <strong data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="22:19">Is EMI the same as total loan cost?</strong> <i aria-hidden="true" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="23:12"></i> </summary> <p data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="25:12">No. EMI is the monthly payment. Total loan cost also depends on the number of payments, total interest, processing fees and any other lender charges.</p> </details><details data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="19:16"> <summary data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="20:18"> <span class="tabular-nums" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="21:38">02</span> <strong data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="22:19">Why can a lender quote differ from a calculator?</strong> <i aria-hidden="true" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="23:12"></i> </summary> <p data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="25:12">Payment dates, daily interest conventions, rounding, fees, insurance and floating-rate resets can create differences.</p> </details><details data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="19:16"> <summary data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="20:18"> <span class="tabular-nums" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="21:38">03</span> <strong data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="22:19">Does a lower EMI always mean a cheaper loan?</strong> <i aria-hidden="true" data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="23:12"></i> </summary> <p data-astro-cid-glf45edw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/content/FaqSection.astro" data-astro-source-loc="25:12">No. A lower EMI caused by a longer tenure can lead to more total interest even though the monthly payment is easier to manage.</p> </details> </div> </section>  <section class="related content-section" aria-labelledby="related-title" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="12:74"> <div class="content-section__heading" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="13:41"> <span class="eyebrow" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="14:27">Keep exploring</span> <h2 id="related-title" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="15:28">Related calculators</h2> <p data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="16:8">Continue with another useful financial calculation.</p> </div> <div class="related__grid" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="18:30"> <a href="/calculators/emi" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="21:36"> <span class="related__icon" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="22:40"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">    <rect x="4" y="2.5" width="16" height="19" rx="2.5" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:32"></rect><path d="M7.5 6h9v3h-9z" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:86"></path><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:113"></path>                      </svg></span> <div data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="23:16"> <h3 data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="24:17">EMI Calculator</h3> <p data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="25:16">Calculate your monthly loan payment and total interest.</p> </div> <svg class="related__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a><a href="/calculators/home-loan-emi" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="21:36"> <span class="related__icon" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="22:40"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">            <path d="m3 9 9-6 9 6" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="40:30"></path><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 21h18M2 9h20" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="40:55"></path>              </svg></span> <div data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="23:16"> <h3 data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="24:17">Home Loan EMI Calculator</h3> <p data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="25:16">Plan monthly repayments for a home loan.</p> </div> <svg class="related__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a><a href="/calculators/car-loan-emi" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="21:36"> <span class="related__icon" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="22:40"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2">    <rect x="4" y="2.5" width="16" height="19" rx="2.5" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:32"></rect><path d="M7.5 6h9v3h-9z" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:86"></path><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="32:113"></path>                      </svg></span> <div data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="23:16"> <h3 data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="24:17">Car Loan EMI Calculator</h3> <p data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="25:16">Estimate repayments for a new or used car loan.</p> </div> <svg class="related__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </div> <a class="related__all" href="/calculators" data-astro-cid-kpfp2etw data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/calculator/RelatedCalculators.astro" data-astro-source-loc="41:47">Browse all calculators <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg></a> </section>  <section class="guide-page__related" aria-labelledby="related-reading-title" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="124:82"> <div data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="125:12"> <span class="eyebrow" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="126:31">Continue reading</span> <h2 id="related-reading-title" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="127:40">Related guides</h2> </div> <ul data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="129:11"> <li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="131:15"> <a href="/guides/sip-vs-lump-sum" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="132:46"> <span data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="133:21">Investing</span> <strong data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="134:23">SIP vs Lump Sum: Whatâs the Difference?</strong> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </li><li data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="131:15"> <a href="/guides/in-hand-salary-from-ctc" data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="132:46"> <span data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="133:21">Salary</span> <strong data-astro-cid-2u677oxp data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/pages/guides/[slug].astro" data-astro-source-loc="134:23">How Is In-Hand Salary Calculated From CTC?</strong> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="28:2"> <path d="M7 17 17 7" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:36"></path><path d="M7 7h10v10" data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Icon.astro" data-astro-source-loc="29:59"></path>                         </svg> </a> </li> </ul> </section> </article>  </main> <footer class="site-footer" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="27:29"> <div class="site-container" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="28:31"> <div class="site-footer__main" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="29:36"> <div class="site-footer__brand" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="30:39"> <a class="brand" href="/" aria-label="finova" data-astro-cid-52dtfbou data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Brand.astro" data-astro-source-loc="7:47"> <img class="brand__logo" src="/images/finova-header.png" alt="" width="751" height="158" loading="eager" decoding="async" aria-hidden="true" data-astro-cid-52dtfbou data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/ui/Brand.astro" data-astro-source-loc="8:4"> </a>  <p data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="32:12">Money, in plain numbers.</p> <span data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="33:15">Transparent financial tools for everyday India.</span> </div> <nav class="site-footer__links" aria-label="Footer navigation" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="36:70"> <div data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="37:14"> <h2 data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="38:15">Calculators</h2> <ul data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="39:15"> <li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:49"><a href="/calculators/category/loans" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:68">Loans</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:49"><a href="/calculators/category/investments" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:68">Investments</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:49"><a href="/calculators/category/tax" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:68">Tax</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:49"><a href="/calculators/category/salary-payroll" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:68">Salary &amp; Payroll</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:49"><a href="/calculators" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="40:68">All calculators</a></li> </ul> </div> <div data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="43:14"> <h2 data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="44:15">Learn</h2> <ul data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="45:15"> <li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="46:44"><a href="/guides" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="46:63">Guides</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="46:44"><a href="/methodology" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="46:63">Methodology</a></li> </ul> </div> <div data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="49:14"> <h2 data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="50:15">Company</h2> <ul data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="51:15"> <li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="52:46"><a href="/about" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="52:65">About</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="52:46"><a href="/contact" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="52:65">Contact</a></li> </ul> </div> <div data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="55:14"> <h2 data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="56:15">Legal</h2> <ul data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="57:15"> <li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:44"><a href="/privacy" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:63">Privacy</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:44"><a href="/terms" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:63">Terms</a></li><li data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:44"><a href="/disclaimer" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="58:63">Disclaimer</a></li> </ul> </div> </nav> </div> <div class="site-footer__bottom" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="64:38"> <p data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="65:10">Â© 2026 Finova. All rights reserved.</p> <p data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="66:11"><span aria-hidden="true" data-astro-cid-sz7xmlte data-astro-source-file="C:/Users/Owner/OneDrive/Desktop/FINOVA FINAL/src/components/Footer.astro" data-astro-source-loc="66:35">â¹</span> Built for clearer financial decisions in India.</p> </div> </div> </footer>  </body></html> 

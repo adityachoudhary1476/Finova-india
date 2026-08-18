@@ -1,0 +1,107 @@
+---
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { SITE_CONTACT } from '../config/site';
+---
+
+<StaticPageLayout
+  title="Privacy Policy"
+  metaTitle="Privacy Policy | Finova"
+  description="Current privacy practices for Finova calculator inputs, URL state, cookies, analytics, hosting logs and email contact."
+  canonicalPath="/privacy"
+  eyebrow="Legal and privacy"
+  intro="This policy describes the website as it exists today. It does not describe advertising, accounts or tracking services that have not been implemented."
+  updatedDate="2026-08-17"
+  noIndex
+>
+  <section>
+    <h2>1. Introduction</h2>
+    <p>Finova is a public financial calculator and educational website. You can use its current calculators without creating an account or signing in.</p>
+  </section>
+
+  <section>
+    <h2>2. Information the website asks for</h2>
+    <p>Calculator fields ask for financial values needed to perform a calculation, such as a loan amount, interest rate, salary figure or investment period. The website does not ask for your name, PAN, Aadhaar number, bank account, card details or login credentials.</p>
+  </section>
+
+  <section>
+    <h2>3. Calculator inputs</h2>
+    <p>The current calculator engines run in your browser. The source code does not send calculator inputs to a Finova API, database or account system.</p>
+    <p>Some calculators place validated input values in the page URL using the browser history API. This supports revisiting or copying a calculation. A URL can be stored in browser history, server request logs or any service through which you choose to share it. Do not enter personal identifiers or confidential information into calculator fields.</p>
+    <p>The “Copy link” action uses the browser clipboard API only after you activate it.</p>
+  </section>
+
+  <section>
+    <h2>4. Automatically processed request information</h2>
+    <p>Finova’s application code does not implement its own visitor database. The hosting provider that serves the website may process standard request information—such as IP address, user agent, requested URL, response status and timestamp—to deliver, secure and operate the service. The exact records and retention depend on the production hosting configuration.</p>
+  </section>
+
+  <section>
+    <h2>5. Cookies and browser storage</h2>
+    <p>The current application code does not set cookies and does not use <code>localStorage</code>, <code>sessionStorage</code> or IndexedDB. No cookie-consent banner is shown because no cookie-based feature is currently implemented.</p>
+    <p>A future service could change this behaviour. This policy should be updated before such a service is enabled.</p>
+  </section>
+
+  <section>
+    <h2>6. Analytics and error tracking</h2>
+    <p>No analytics, session replay, behavioural tracking or third-party error-monitoring service is present in the current codebase.</p>
+  </section>
+
+  <section>
+    <h2>7. Advertising and affiliate tracking</h2>
+    <p>The current website does not include advertising scripts, Google AdSense, affiliate tracking or financial lead-generation forms. If advertising or affiliate services are introduced, this policy will need to identify them before they are activated.</p>
+  </section>
+
+  <section>
+    <h2>8. Third-party services and external links</h2>
+    <p>The site’s fonts and interface assets are served with the website rather than loaded from a third-party font CDN. The public pages contain links to government references and other external websites where useful. Opening an external link takes you to a service with its own terms and privacy practices.</p>
+    <p>The current website contains no embedded third-party videos, social widgets, payment systems or external financial APIs.</p>
+  </section>
+
+  <section>
+    <h2>9. Email contact</h2>
+    <p>Finova does not currently provide a website contact form. If a contact email is configured, selecting the email link opens your email application. The message is then handled by your email provider and the receiving provider, not by calculator code.</p>
+    <p>Email retention depends on the configured mailbox and providers. Do not send sensitive financial documents or identifiers.</p>
+  </section>
+
+  <section>
+    <h2>10. How information is used or shared</h2>
+    <p>Because the current application does not operate user accounts, a calculator-input database, analytics or advertising, it has no application-level process for profiling users, selling calculator inputs or sharing those inputs with advertisers.</p>
+    <p>Hosting request records and any email you choose to send are subject to the operational providers described above.</p>
+  </section>
+
+  <section>
+    <h2>11. Data retention</h2>
+    <p>Finova’s current application code does not retain calculator inputs in a server database. Input values may remain in your current browser state, copied URL, browser history or hosting logs as described above. Email retention depends on the configured email service.</p>
+  </section>
+
+  <section>
+    <h2>12. Data security</h2>
+    <p>No website can promise absolute security. Finova reduces the amount of application data handled by not requiring accounts and by keeping current calculations in the browser. Security of hosting, network transport, browser history and email depends on the relevant systems and their configuration.</p>
+  </section>
+
+  <section>
+    <h2>13. Children’s privacy</h2>
+    <p>Finova is a general financial education utility and is not designed to collect information from children. The website does not ask for age or provide child-specific accounts. A parent or guardian should supervise a child’s use of financial information and email.</p>
+  </section>
+
+  <section>
+    <h2>14. Your choices and privacy requests</h2>
+    <p>You can avoid URL-based calculator state by not copying or sharing a calculation link, and you can clear relevant browser history through your browser. Finova does not provide an account dashboard because there are no current user accounts.</p>
+    <p>For a request concerning an email you sent, use the <a href="/contact">contact page</a>. The ability to act on a request depends on whether the contact mailbox has been configured and whether the relevant record exists.</p>
+  </section>
+
+  <section>
+    <h2>15. Changes to this policy</h2>
+    <p>This policy should be updated when the codebase adds a material data practice, such as analytics, advertising, accounts, a contact form, newsletter, database or external API. The “Last updated” date will identify the current version.</p>
+    <p>This page describes detected implementation practices. It is not presented as lawyer-reviewed and does not claim compliance with a specific privacy law.</p>
+  </section>
+
+  <section>
+    <h2>16. Contact</h2>
+    {SITE_CONTACT.isPlaceholder ? (
+      <p>The production contact email has not yet been configured. The site owner can set <code>PUBLIC_CONTACT_EMAIL</code>; until then, the <a href="/contact">contact page</a> shows the placeholder status.</p>
+    ) : (
+      <p>Privacy questions can be sent to <a href={`mailto:${SITE_CONTACT.email}`}>{SITE_CONTACT.email}</a>.</p>
+    )}
+  </section>
+</StaticPageLayout>

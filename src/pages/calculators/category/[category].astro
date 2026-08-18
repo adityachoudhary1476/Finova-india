@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/calculator/Breadcrumbs.astro';
+import DirectoryCalculatorCard from '../../../components/calculator/DirectoryCalculatorCard.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import { getLiveCalculatorsByCategory, liveCategories } from '../../../data/calculators';
+import { guides } from '../../../data/guides';
+import type { CalculatorCategory } from '../../../data/types';
+
+export function getStaticPaths() {
+  return liveCategories.map((category) => ({
+    params: { category: category.id },
+    props: { category },
+  }));
+}
+
+interface Props {
+  category: CalculatorCategory;
+}
+
+const { category } = Astro.props;
+const calculators = getLiveCalculatorsByCategory(category.id);
+const calculatorIds = new Set(calculators.map((calculator) => calculator.id));
+const relatedGuides = guides.filter((guide) => guide.relatedCalculatorIds.some((id) => calculatorIds.has(id)));
+const title = `${category.title} Calculators for India | Finova`;
+const description = `${category.description} Browse ${calculators.length} free ${category.title.toLowerCase()} calculators with formulas, assumptions and Indian number formatting.`;
+const route = `/calculators/category/${category.id}`;
+const pageUrl = new URL(route, Astro.site ?? Astro.url.origin).toString();
+const calculatorsUrl = new URL('/calculators', Astro.site ?? Astro.url.origin).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: calculators.length,
+        itemListElement: calculators.map((calculator, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: calculator.name,
+          url: new URL(calculator.route, Astro.site ?? Astro.url.origin).toString(),
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
+        { '@type': 'ListItem', position: 2, name: 'Calculators', item: calculatorsUrl },
+        { '@type': 'ListItem', position: 3, name: category.title, item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath={route} structuredData={structuredData}>
+  <div class="category-page site-container">
+    <Breadcrumbs items={[
+      { label: 'Home', href: '/' },
+      { label: 'Calculators', href: '/calculators' },
+      { label: category.title },
+    ]} />
+
+    <header class="category-page__header">
+      <span class="category-page__icon"><Icon name={category.icon} size={22} /></span>
+      <span class="eyebrow">Calculator category</span>
+      <h1>{category.title} calculators</h1>
+      <p>{category.description} Choose from {calculators.length} working tools below.</p>
+    </header>
+
+    <section class="category-page__tools" aria-labelledby="tools-title">
+      <div class="category-page__section-heading">
+        <h2 id="tools-title">Available tools</h2>
+        <span class="tabular-nums">{String(calculators.length).padStart(2, '0')}</span>
+      </div>
+      <div class="category-page__grid">
+        {calculators.map((calculator, index) => (
+          <DirectoryCalculatorCard calculator={calculator} indexLabel={`0${index + 1}`} />
+        ))}
+      </div>
+    </section>
+
+    {relatedGuides.length > 0 && (
+      <section class="category-page__guides" aria-labelledby="category-guides-title">
+        <div>
+          <span class="eyebrow">Useful reading</span>
+          <h2 id="category-guides-title">Understand the numbers</h2>
+        </div>
+        <ul>
+          {relatedGuides.map((guide) => (
+            <li>
+              <a href={`/guides/${guide.slug}`}>
+                <span>{guide.category}</span>
+                <strong>{guide.title}</strong>
+                <Icon name="arrow-up-right" size={18} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .category-page {
+    padding: 1rem 0 var(--pc-section-space);
+  }
+
+  .category-page__header {
+    max-width: 52rem;
+    padding: clamp(3rem, 8vw, 6.5rem) 0;
+  }
+
+  .category-page__icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+    place-items: center;
+    border: 1px solid #99f6e4;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .category-page h1 {
+    margin: 1rem 0 1.1rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 520;
+    letter-spacing: -0.06em;
+    line-height: 0.96;
+  }
+
+  .category-page__header p {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .category-page__tools,
+  .category-page__guides {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .category-page__section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .category-page__section-heading h2,
+  .category-page__guides h2 {
+    margin: 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 540;
+    letter-spacing: -0.04em;
+  }
+
+  .category-page__section-heading span {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .category-page__grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .category-page__guides {
+    display: grid;
+    gap: 2rem;
+    margin-top: var(--pc-section-space);
+  }
+
+  .category-page__guides h2 {
+    margin-top: 1rem;
+  }
+
+  .category-page__guides ul {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--pc-border);
+    list-style: none;
+  }
+
+  .category-page__guides a {
+    display: grid;
+    min-height: 5rem;
+    grid-template-columns: minmax(5rem, 0.3fr) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .category-page__guides a > span {
+    color: var(--pc-accent);
+    font-size: 0.72rem;
+    font-weight: 680;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .category-page__guides a strong {
+    color: var(--pc-ink);
+    font-size: 0.92rem;
+    font-weight: 620;
+  }
+
+  .category-page__guides a :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  @media (min-width: 40rem) {
+    .category-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .category-page__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .category-page__guides {
+      grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import PpfCalculator from '../../components/calculator/react/calculators/PpfCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('ppf');
+if (!definition) throw new Error('PPF calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="PPF rates are notified by the Government and can change. This projection assumes the entered rate and contribution timing for illustration.">
+  <PpfCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How PPF maturity is projected" formula="Closing balance = Opening balance + Deposits + Interest; monthly interest ≈ eligible balance × annual rate ÷ 12" description="The calculator accrues interest monthly for illustration and credits the year’s accrued interest to the balance at year end." variables={[
+    { symbol: 'Opening', meaning: 'PPF balance at the start of the year.' }, { symbol: 'Deposits', meaning: 'Annual or monthly contributions entered.' }, { symbol: 'Rate', meaning: 'Editable annual interest assumption.' }, { symbol: 'Closing', meaning: 'Balance carried into the next year.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The annual rate entered remains constant only for this projection; notified rates may change.',
+    'Annual contributions are assumed at the start of the year and monthly contributions at the start of each month.',
+    'Contributions are constrained to the configured annual PPF limits.',
+    'Withdrawals, loans, missed deposits, extension rules and account-specific adjustments are excluded.',
+  ]} />
+  <EducationSection slot="education" title="Understand PPF maturity" intro="PPF value is built from deposits and interest credited under the rate assumption used for each projected year." items={[
+    { title: 'What is PPF?', body: 'Public Provident Fund is a long-term government-backed savings scheme governed by notified rules and interest rates.' },
+    { title: 'Contributions and interest', body: 'Deposits increase principal. Interest is based on eligible balances and is credited according to scheme rules.' },
+    { title: 'Maturity projection', body: 'The calculator separates cumulative deposits from estimated interest so the maturity amount is not a black box.' },
+  ]} />
+</CalculatorShell>

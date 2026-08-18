@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <!-- Rounded dark-green square background #123B2C with 16% corner radius = 28.8px -->
+  <rect width="180" height="180" rx="28.8" fill="#123B2C" />
+  
+  <!-- Two-tone glyph: terracotta-to-cream horizontal gradient -->
+  <defs>
+    <linearGradient id="appIconGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4622D" />
+      <stop offset="100%" style="stop-color:#F5EFE2" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Glyph: abstract wedge/sweep shape matching the logo mark proportions -->
+  <!-- Positioned to fit within the square with appropriate padding -->
+  <path d="M36 36 L36 114 L72 114 L72 36 Z M54 36 L54 90 L72 72 Z" fill="url(#appIconGrad)" />
+</svg>

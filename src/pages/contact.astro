@@ -1,0 +1,63 @@
+---
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { SITE_CONTACT } from '../config/site';
+---
+
+<StaticPageLayout
+  title="Contact"
+  metaTitle="Contact Finova"
+  description="Contact Finova about calculator feedback, corrections, bugs or accessibility issues."
+  canonicalPath="/contact"
+  eyebrow="Get in touch"
+  intro="Use the contact channel below for product feedback and corrections. Finova cannot provide personal financial advice or account support."
+>
+  <section class="static-page__callout">
+    <h2>Contact email</h2>
+    {SITE_CONTACT.isPlaceholder ? (
+      <>
+        <p><strong>Contact email not configured.</strong></p>
+        <p class="contact-placeholder">Site owner: set <code>PUBLIC_CONTACT_EMAIL</code> during deployment to replace this clearly marked placeholder.</p>
+      </>
+    ) : (
+      <p><a href={`mailto:${SITE_CONTACT.email}`}>{SITE_CONTACT.email}</a></p>
+    )}
+    <p>Do not send PAN, Aadhaar, bank account numbers, payslips, tax returns or other sensitive personal information.</p>
+  </section>
+
+  <section>
+    <h2>What you can contact us about</h2>
+    <ul>
+      <li><strong>General inquiries:</strong> questions about the website or its scope.</li>
+      <li><strong>Feedback:</strong> suggestions that make a calculator or guide clearer.</li>
+      <li><strong>Bug reports:</strong> broken layouts, inaccessible controls or unexpected behaviour.</li>
+      <li><strong>Calculator corrections:</strong> a reproducible difference in a formula, rule or displayed result.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What to include in a useful report</h2>
+    <ul>
+      <li>The calculator or guide URL.</li>
+      <li>The non-sensitive inputs used.</li>
+      <li>The result shown and the result you expected.</li>
+      <li>Your browser and device type if the problem is visual or interactive.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Support limits</h2>
+    <p>Finova cannot give personalised investment recommendations, tax filing assistance, legal opinions, loan approval support or access to a financial account.</p>
+  </section>
+</StaticPageLayout>
+
+<style>
+  .contact-placeholder code {
+    padding: 0.15rem 0.35rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-sm);
+    background: var(--pc-canvas);
+    color: var(--pc-ink);
+    font-family: var(--pc-font-mono);
+    font-size: 0.78em;
+  }
+</style>

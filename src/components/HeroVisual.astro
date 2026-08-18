@@ -1,0 +1,295 @@
+---
+import Icon from './ui/Icon.astro';
+---
+
+<figure class="hero-visual" aria-label="Illustrative SIP projection: ₹10,000 per month for 15 years at an assumed 12% return, with ₹18,00,000 invested and an estimated value of ₹50,45,760">
+  <div class="hero-visual__header">
+    <div>
+      <span class="hero-visual__kicker">Illustrative projection</span>
+      <span class="hero-visual__status"><i></i> Example</span>
+    </div>
+    <Icon name="chart" size={19} />
+  </div>
+
+  <div class="hero-visual__inputs">
+    <div>
+      <span>Monthly investment</span>
+      <strong class="tabular-nums">₹10,000</strong>
+    </div>
+    <div>
+      <span>Expected return</span>
+      <strong class="tabular-nums">12%</strong>
+    </div>
+    <div>
+      <span>Time period</span>
+      <strong class="tabular-nums">15 years</strong>
+    </div>
+  </div>
+
+  <div class="hero-visual__chart">
+    <div class="hero-visual__grid" aria-hidden="true"></div>
+    <svg viewBox="0 0 520 142" role="presentation" preserveAspectRatio="none">
+      <path class="area" d="M0 128 C62 126 74 116 124 113 C181 109 190 91 245 92 C303 92 318 62 372 64 C426 66 458 32 520 16 L520 142 L0 142 Z" />
+      <path class="contributions" d="M0 128 L520 88" />
+      <path class="line" pathLength="1" d="M0 128 C62 126 74 116 124 113 C181 109 190 91 245 92 C303 92 318 62 372 64 C426 66 458 32 520 16" />
+      <circle cx="520" cy="16" r="4.5" />
+    </svg>
+    <div class="hero-visual__legend" aria-hidden="true">
+      <span><i></i> Estimate</span>
+      <span><i class="dashed"></i> Invested</span>
+    </div>
+    <span class="hero-visual__year hero-visual__year--start">Today</span>
+    <span class="hero-visual__year hero-visual__year--end">Year 15</span>
+  </div>
+
+  <figcaption>
+    <div>
+      <span>Estimated value</span>
+      <strong class="tabular-nums">₹50,45,760</strong>
+    </div>
+    <div class="hero-visual__summary">
+      <span>Total invested</span>
+      <strong class="tabular-nums">₹18,00,000</strong>
+      <small>Illustration only</small>
+    </div>
+  </figcaption>
+</figure>
+
+<style>
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 35rem;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--pc-border-strong);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+    box-shadow: 0 22px 60px rgb(12 10 9 / 0.075);
+  }
+
+  .hero-visual::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--pc-accent);
+    content: '';
+  }
+
+  .hero-visual__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.15rem 1.25rem;
+    border-bottom: 1px solid var(--pc-border);
+    color: var(--pc-muted);
+  }
+
+  .hero-visual__header > div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-visual__kicker {
+    color: var(--pc-ink);
+    font-size: 0.72rem;
+    font-weight: 680;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+  }
+
+  .hero-visual__status {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--pc-muted);
+    font-size: 0.66rem;
+  }
+
+  .hero-visual__status i {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 50%;
+    background: var(--pc-accent);
+  }
+
+  .hero-visual__inputs {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr;
+    padding: 1.35rem 1.25rem 1.5rem;
+  }
+
+  .hero-visual__inputs > div {
+    display: grid;
+    gap: 0.35rem;
+    padding-inline: 0.75rem;
+    border-right: 1px solid var(--pc-border);
+  }
+
+  .hero-visual__inputs > div:first-child {
+    padding-left: 0;
+  }
+
+  .hero-visual__inputs > div:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .hero-visual__inputs span,
+  figcaption span {
+    color: var(--pc-muted);
+    font-size: 0.61rem;
+    line-height: 1.35;
+  }
+
+  .hero-visual__inputs strong {
+    color: var(--pc-ink);
+    font-size: clamp(0.8rem, 2.5vw, 0.94rem);
+    font-weight: 650;
+    line-height: 1.2;
+  }
+
+  .hero-visual__chart {
+    position: relative;
+    height: 9.75rem;
+    margin: 0 1.25rem;
+    overflow: hidden;
+    border-top: 1px solid var(--pc-border);
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .hero-visual__grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(var(--pc-border) 1px, transparent 1px), linear-gradient(90deg, var(--pc-border) 1px, transparent 1px);
+    background-size: 100% 2.3rem, 25% 100%;
+    opacity: 0.45;
+  }
+
+  .hero-visual__chart svg {
+    position: absolute;
+    inset: 0 0 1.25rem;
+    width: 100%;
+    height: calc(100% - 1.25rem);
+    overflow: visible;
+  }
+
+  .hero-visual__chart .area {
+    fill: rgb(204 251 241 / 0.6);
+    stroke: none;
+  }
+
+  .hero-visual__chart .contributions {
+    fill: none;
+    stroke: var(--pc-muted);
+    stroke-width: 1.25;
+    stroke-dasharray: 5 5;
+    opacity: 0.85;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .hero-visual__chart .line {
+    fill: none;
+    stroke: var(--pc-accent);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .hero-visual__chart circle {
+    fill: var(--pc-surface);
+    stroke: var(--pc-accent);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .hero-visual__legend {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.35rem;
+    display: flex;
+    gap: 0.7rem;
+    padding: 0.2rem 0.35rem;
+    background: var(--pc-surface);
+    color: var(--pc-muted);
+    font-size: 0.54rem;
+    line-height: 1;
+  }
+
+  .hero-visual__legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .hero-visual__legend i {
+    width: 0.8rem;
+    height: 2px;
+    background: var(--pc-accent);
+  }
+
+  .hero-visual__legend i.dashed {
+    height: 0;
+    border-top: 1px dashed var(--pc-muted);
+    background: none;
+  }
+
+  .hero-visual__year {
+    position: absolute;
+    bottom: 0.2rem;
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.55rem;
+  }
+
+  .hero-visual__year--start { left: 0; }
+  .hero-visual__year--end { right: 0; }
+
+  .hero-visual figcaption {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.35rem 1.25rem 1.5rem;
+  }
+
+  .hero-visual figcaption > div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .hero-visual figcaption strong {
+    color: var(--pc-ink);
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.75rem, 5vw, 2.55rem);
+    font-variation-settings: 'opsz' 48, 'SOFT' 35;
+    font-weight: 580;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .hero-visual__summary {
+    align-items: end;
+    text-align: right;
+  }
+
+  .hero-visual__summary strong {
+    font-family: var(--pc-font-body) !important;
+    font-size: 0.88rem !important;
+    font-weight: 680 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-visual__summary small {
+    color: var(--pc-accent);
+    font-size: 0.55rem;
+    font-weight: 650;
+  }
+
+  @media (max-width: 25rem) {
+    .hero-visual__status {
+      display: none;
+    }
+  }
+</style>

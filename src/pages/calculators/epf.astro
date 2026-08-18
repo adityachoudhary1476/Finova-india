@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import EpfCalculator from '../../components/calculator/react/calculators/EpfCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('epf');
+if (!definition) throw new Error('EPF calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="EPF contributions, EPS allocation, wage ceilings and notified interest can vary. Use employer and EPFO records for authoritative values.">
+  <EpfCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How the EPF corpus is projected" formula="Monthly corpus = Previous corpus + employee EPF + employer EPF + estimated interest" description="Basic salary grows annually by the entered assumption. Contributions are added monthly and the entered annual interest rate is converted to a monthly illustration." variables={[
+    { symbol: 'Employee EPF', meaning: 'Basic salary × employee contribution rate.' }, { symbol: 'Employer EPF', meaning: 'Basic salary × employer share entered as credited to EPF.' }, { symbol: 'Interest', meaning: 'Estimated growth using the editable annual rate.' }, { symbol: 'Corpus', meaning: 'Current balance plus contributions and estimated interest.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'Employee and employer percentages apply to the monthly basic salary entered.',
+    'The employer rate should represent only the share credited to EPF; EPS allocation is not inferred.',
+    'Basic salary increases once each year at the entered rate.',
+    'The interest rate remains constant for projection even though EPF rates are notified and can change.',
+  ]} />
+  <EducationSection slot="education" title="Understand EPF corpus growth" intro="The employee share, employer EPF share, existing balance and interest all contribute to the projected corpus." items={[
+    { title: 'What is EPF?', body: 'Employees’ Provident Fund is a retirement savings arrangement with contributions governed by scheme and payroll rules.' },
+    { title: 'Employee vs employer', body: 'Employee contribution is deducted from salary. The employer contribution can be allocated between EPF and EPS depending on applicable rules.' },
+    { title: 'Corpus growth', body: 'A longer contribution period and interest on accumulated balances can materially affect the projected retirement corpus.' },
+  ]} />
+</CalculatorShell>

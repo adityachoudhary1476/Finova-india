@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/calculator/Breadcrumbs.astro';
+import ArticleCard from '../../components/ui/ArticleCard.astro';
+import { guides } from '../../data/guides';
+
+const title = 'Financial Guides — Understand the Numbers | Finova';
+const description = 'Plain-English guides to EMI, SIP, lump-sum investing, CTC and in-hand salary, connected to Finova’s free calculators.';
+const pageUrl = new URL('/guides', Astro.site ?? Astro.url.origin).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: pageUrl,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: guides.length,
+        itemListElement: guides.map((guide, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: guide.title,
+          url: new URL(`/guides/${guide.slug}`, Astro.site ?? Astro.url.origin).toString(),
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
+        { '@type': 'ListItem', position: 2, name: 'Guides', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/guides" structuredData={structuredData}>
+  <div class="guides-page site-container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Guides' }]} />
+    <header class="guides-page__header">
+      <span class="eyebrow">Plain-English guides</span>
+      <h1>Understand what the numbers mean.</h1>
+      <p>Short, practical explanations that make calculator results easier to interpret. No product recommendations and no hidden sales pitch.</p>
+    </header>
+
+    <section class="guides-page__list" aria-labelledby="guide-list-title">
+      <div class="guides-page__section-heading">
+        <h2 id="guide-list-title">All guides</h2>
+        <span class="tabular-nums">{String(guides.length).padStart(2, '0')} articles</span>
+      </div>
+      <div class="guides-page__grid">
+        {guides.map((guide, index) => <ArticleCard guide={guide} index={index} />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .guides-page {
+    padding: 1rem 0 var(--pc-section-space);
+  }
+
+  .guides-page__header {
+    max-width: 58rem;
+    padding: clamp(3rem, 8vw, 7rem) 0;
+  }
+
+  .guides-page h1 {
+    margin: 1.25rem 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3.25rem, 8vw, 7rem);
+    font-weight: 520;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  .guides-page__header p {
+    max-width: 44rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .guides-page__list {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .guides-page__section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .guides-page__section-heading h2 {
+    margin: 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 540;
+  }
+
+  .guides-page__section-heading span {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.75rem;
+  }
+
+  .guides-page__grid {
+    display: grid;
+  }
+
+  @media (min-width: 40rem) {
+    .guides-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .guides-page__grid > :first-child {
+      border-right: 1px solid var(--pc-border-strong);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .guides-page__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .guides-page__grid > :not(:last-child) {
+      border-right: 1px solid var(--pc-border-strong);
+    }
+  }
+</style>

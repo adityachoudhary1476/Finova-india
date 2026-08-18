@@ -1,0 +1,57 @@
+---
+interface Props {
+  id?: string;
+  number: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'split';
+}
+
+const { id, number, title, description, align = 'split' } = Astro.props;
+---
+
+<header class:list={['section-header', `section-header--${align}`]}>
+  <div>
+    <span class="eyebrow">{number}</span>
+    <h2 id={id}>{title}</h2>
+  </div>
+  {description && <p>{description}</p>}
+</header>
+
+<style>
+  .section-header {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+  }
+
+  .section-header h2 {
+    max-width: 18ch;
+    margin: 1rem 0 0;
+    font-family: var(--pc-font-display);
+    font-size: var(--pc-text-2xl);
+    font-variation-settings: 'opsz' 72, 'SOFT' 55, 'WONK' 0;
+    font-weight: 540;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  .section-header p {
+    max-width: 35rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+    line-height: 1.65;
+  }
+
+  @media (min-width: 48rem) {
+    .section-header--split {
+      grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.72fr);
+      align-items: end;
+    }
+
+    .section-header--split p {
+      justify-self: end;
+    }
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import type { CalculatorItem } from '../../data/types';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  definition: CalculatorItem;
+  categoryLabel: string;
+}
+
+const { definition, categoryLabel } = Astro.props;
+---
+
+<header class="calculator-header">
+  <div class="calculator-header__meta">
+    <span><Icon name={definition.icon} size={16} /> {categoryLabel}</span>
+    <span class="tabular-nums">CALC / {definition.slug.toUpperCase()}</span>
+  </div>
+  <h1>{definition.name}</h1>
+  <p>{definition.description}</p>
+  <div class="calculator-header__trust" aria-label="Calculator benefits">
+    <span><Icon name="spark" size={15} /> Instant</span>
+    <span><Icon name="lock" size={15} /> Private</span>
+    <span><Icon name="rupee" size={15} /> Indian formatting</span>
+  </div>
+</header>
+
+<style>
+  .calculator-header {
+    max-width: 53rem;
+    padding: clamp(1.75rem, 4vw, 3.25rem) 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .calculator-header__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .calculator-header__meta > span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--pc-accent);
+    font-family: var(--pc-font-body);
+    font-weight: 680;
+  }
+
+  .calculator-header h1 {
+    margin-bottom: 0.8rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(2.75rem, 6vw, 5.25rem);
+    font-variation-settings: 'opsz' 96, 'SOFT' 50;
+    font-weight: 520;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .calculator-header > p {
+    max-width: 44rem;
+    margin-bottom: 1.3rem;
+    color: var(--pc-muted);
+    font-size: var(--pc-text-lg);
+  }
+
+  .calculator-header__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1rem;
+  }
+
+  .calculator-header__trust span {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--pc-text);
+    font-size: 0.78rem;
+    font-weight: 580;
+  }
+
+  .calculator-header__trust :global(svg) {
+    color: var(--pc-accent);
+  }
+</style>

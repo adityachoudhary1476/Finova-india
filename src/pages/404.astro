@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/ui/Icon.astro';
+---
+
+<BaseLayout
+  title="Page Not Found | Finova"
+  description="The requested Finova page could not be found."
+  noIndex
+>
+  <section class="not-found site-container" aria-labelledby="not-found-title">
+    <span class="not-found__code tabular-nums">404</span>
+    <h1 id="not-found-title">That page doesn't exist.</h1>
+    <p>The address may be incomplete, or the page may have moved. Use one of the links below to continue.</p>
+    <nav aria-label="404 page options">
+      <a href="/">Home <Icon name="arrow-up-right" size={17} /></a>
+      <a href="/calculators">Calculators <Icon name="arrow-up-right" size={17} /></a>
+      <a href="/#calculator-search">Search <Icon name="search" size={17} /></a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 70vh;
+    align-content: center;
+    padding-block: clamp(4rem, 10vw, 9rem);
+  }
+
+  .not-found__code {
+    color: var(--pc-accent);
+    font-family: var(--pc-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  .not-found h1 {
+    max-width: 12ch;
+    margin: 1.25rem 0 1rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 520;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  .not-found > p {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .not-found nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .not-found nav a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--pc-border-strong);
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-surface);
+    color: var(--pc-text);
+    font-size: 0.78rem;
+    font-weight: 650;
+    transition: border-color var(--pc-duration-fast) var(--pc-ease), color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .not-found nav a:hover {
+    border-color: var(--pc-accent);
+    color: var(--pc-accent);
+  }
+</style>

@@ -1,0 +1,30 @@
+{
+  "name": "Finova — Financial Calculators for India",
+  "short_name": "Finova",
+  "description": "Transparent, easy-to-use financial calculators for everyday India. Plan SIPs, FDs, EMIs, taxes, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5EFE2",
+  "theme_color": "#123B2C",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/finova-favicon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/finova-app-icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

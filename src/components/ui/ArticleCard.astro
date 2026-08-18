@@ -1,0 +1,108 @@
+---
+import type { GuideDefinition } from '../../data/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  guide: GuideDefinition;
+  index: number;
+}
+
+const { guide, index } = Astro.props;
+---
+
+<article class="article-card">
+  <a class="article-card__link" href={`/guides/${guide.slug}`} aria-label={`Read ${guide.title}`}>
+    <div class="article-card__meta">
+      <span>{guide.category}</span>
+      <span class="article-card__number tabular-nums">0{index + 1}</span>
+    </div>
+    <h3>{guide.title}</h3>
+    <p>{guide.description}</p>
+    <footer>
+      <span>{guide.readTime}</span>
+      <span class="article-card__preview">Read guide <Icon name="arrow-up-right" size={16} /></span>
+    </footer>
+  </a>
+</article>
+
+<style>
+  .article-card {
+    height: 100%;
+    border-top: 2px solid var(--pc-ink);
+  }
+
+  .article-card__link {
+    display: flex;
+    min-height: 22rem;
+    height: 100%;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    transition: background-color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .article-card__link:hover {
+    background: rgb(255 255 255 / 0.42);
+  }
+
+  .article-card__meta,
+  .article-card footer,
+  .article-card__preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .article-card__meta {
+    color: var(--pc-accent);
+    font-size: 0.78rem;
+    font-weight: 680;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .article-card__number {
+    color: var(--pc-text);
+    font-family: var(--pc-font-mono);
+  }
+
+  .article-card h3 {
+    max-width: 17ch;
+    margin: 3.25rem 0 1rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.55rem, 2.5vw, 2rem);
+    font-variation-settings: 'opsz' 48, 'SOFT' 55;
+    font-weight: 520;
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .article-card p {
+    max-width: 32rem;
+    margin-bottom: 2.5rem;
+    color: var(--pc-text);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .article-card footer {
+    margin-top: auto;
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--pc-border-strong);
+    color: var(--pc-text);
+    font-size: 0.82rem;
+  }
+
+  .article-card__preview {
+    gap: 0.45rem;
+    color: var(--pc-accent);
+    font-weight: 650;
+  }
+
+  .article-card__preview :global(svg) {
+    transition: transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .article-card__link:hover .article-card__preview :global(svg) {
+    transform: translate(2px, -2px);
+  }
+</style>

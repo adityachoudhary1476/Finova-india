@@ -1,0 +1,29 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import IncomeTaxCalculator from '../../components/calculator/react/calculators/IncomeTaxCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('income-tax');
+if (!definition) throw new Error('Income tax calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Income tax depends on residency, age, income types, exemptions, deductions and current law. This focused estimate is not filing or professional tax advice.">
+  <IncomeTaxCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How the tax estimate is built" formula="Taxable income = Included income − permitted deductions; Total tax = (slab tax − rebate/relief) + 4% cess" description="Each portion of taxable income is charged at its slab rate. The configured regime rules then apply eligible rebate or marginal relief and health and education cess." variables={[
+    { symbol: 'Income', meaning: 'Salary plus other normal slab-rate income entered.' }, { symbol: 'Deductions', meaning: 'Regime-specific standard and eligible entered deductions.' }, { symbol: 'Slab tax', meaning: 'Sum of tax calculated within each income band.' }, { symbol: 'Cess', meaning: 'Health and education cess on tax after rebate or relief.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The rule set is AY 2026-27 (FY 2025-26) for a resident individual below age 60.',
+    'Only salary and other income taxable at normal slab rates are modelled.',
+    'New-regime standard deduction, slabs, rebate and marginal relief are configured separately from old-regime rules.',
+    'Income is limited to ₹50 lakh because surcharge and surcharge marginal relief are outside this focused estimator.',
+    'Capital gains, special-rate income, exemptions, loss set-off, TDS and advance tax are excluded.',
+  ]} />
+  <EducationSection slot="education" title="Understand the income tax estimate" intro="Tax is calculated in layers: income, deductions, taxable income, slab tax, rebate or relief, and cess." items={[
+    { title: 'How income tax is calculated', body: 'Included income is reduced by deductions allowed under the selected regime. Each slab then taxes only the income falling inside that band.' },
+    { title: 'Old vs new regime', body: 'The new regime uses different slabs and limits many deductions. The old regime permits entered eligible deductions but uses older slab rates.' },
+    { title: 'Deductions', body: 'The calculator caps entered 80C deduction at ₹1,50,000 for the old-regime estimate. Other entered deductions are accepted only as user-confirmed amounts.' },
+    { title: 'Rebate and cess', body: 'Eligible rebate or marginal relief is applied after slab tax, followed by 4% health and education cess in this configured year.' },
+  ]} />
+</CalculatorShell>

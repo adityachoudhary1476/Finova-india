@@ -1,0 +1,169 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/calculator/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  metaTitle: string;
+  description: string;
+  canonicalPath: string;
+  eyebrow: string;
+  intro: string;
+  updatedDate?: string;
+  noIndex?: boolean;
+}
+
+const { title, metaTitle, description, canonicalPath, eyebrow, intro, updatedDate, noIndex = false } = Astro.props;
+const pageUrl = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: metaTitle,
+      description,
+      url: pageUrl,
+      inLanguage: 'en-IN',
+      ...(updatedDate ? { dateModified: updatedDate } : {}),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
+        { '@type': 'ListItem', position: 2, name: title, item: pageUrl },
+      ],
+    },
+  ],
+};
+const updatedLabel = updatedDate
+  ? new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+    .format(new Date(`${updatedDate}T00:00:00Z`))
+  : undefined;
+---
+
+<BaseLayout title={metaTitle} description={description} canonicalPath={canonicalPath} structuredData={structuredData} noIndex={noIndex}>
+  <article class="static-page site-container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: title }]} />
+    <header class="static-page__header">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{title}</h1>
+      <p>{intro}</p>
+      {updatedLabel && <span class="static-page__updated">Last updated {updatedLabel}</span>}
+    </header>
+    <div class="static-page__content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .static-page {
+    padding: 1rem 0 var(--pc-section-space);
+  }
+
+  .static-page__header {
+    max-width: 58rem;
+    padding: clamp(3rem, 8vw, 7rem) 0;
+  }
+
+  .static-page__header h1 {
+    margin: 1.25rem 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(3.25rem, 8vw, 7rem);
+    font-weight: 520;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+  }
+
+  .static-page__header > p {
+    max-width: 45rem;
+    margin: 0;
+    color: var(--pc-text);
+    font-size: var(--pc-text-lg);
+  }
+
+  .static-page__updated {
+    display: block;
+    margin-top: 1.25rem;
+    color: var(--pc-muted);
+    font-size: 0.78rem;
+  }
+
+  .static-page__content {
+    display: grid;
+    max-width: 54rem;
+    gap: clamp(2.5rem, 6vw, 4.5rem);
+    padding-top: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .static-page__content section {
+    scroll-margin-top: 2rem;
+  }
+
+  .static-page__content h2 {
+    margin: 0 0 1rem;
+    font-family: var(--pc-font-display);
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
+    font-weight: 540;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+
+  .static-page__content h3 {
+    margin: 1.75rem 0 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 680;
+  }
+
+  .static-page__content p,
+  .static-page__content li {
+    color: var(--pc-text);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .static-page__content p {
+    margin-bottom: 1rem;
+  }
+
+  .static-page__content ul {
+    display: grid;
+    gap: 0.55rem;
+    padding-left: 1.25rem;
+  }
+
+  .static-page__content li::marker {
+    color: var(--pc-accent);
+  }
+
+  .static-page__content code {
+    padding: 0.12rem 0.3rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-sm);
+    background: var(--pc-canvas);
+    color: var(--pc-ink);
+    font-family: var(--pc-font-mono);
+    font-size: 0.82em;
+  }
+
+  .static-page__content a {
+    color: var(--pc-accent);
+    font-weight: 620;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .static-page__callout {
+    padding: 1.25rem;
+    border: 1px solid var(--pc-border);
+    border-left: 3px solid var(--pc-accent);
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-surface);
+  }
+
+  .static-page__callout p:last-child {
+    margin-bottom: 0;
+  }
+</style>

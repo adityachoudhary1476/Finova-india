@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import FdCalculator from '../../components/calculator/react/calculators/FdCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('fd');
+if (!definition) throw new Error('FD calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="FD rates, compounding conventions, premature-withdrawal terms, TDS and tax treatment depend on the institution and depositor.">
+  <FdCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How FD maturity is calculated" formula="A = P × (1 + r ÷ n)⁽ⁿ × ᵗ⁾; Interest = A − P" description="The compound-interest formula applies the entered nominal annual rate at the selected compounding frequency." variables={[
+    { symbol: 'P', meaning: 'Deposit principal.' }, { symbol: 'r', meaning: 'Annual interest rate as a decimal.' }, { symbol: 'n', meaning: 'Compounding periods per year.' }, { symbol: 't', meaning: 'Deposit tenure in years.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The entered FD rate remains unchanged throughout the tenure.',
+    'Interest is reinvested at the selected frequency with no withdrawals.',
+    'Tax, TDS, premature-withdrawal penalties and bank-specific rounding are excluded.',
+    'No bank-specific rate is supplied or recommended by Finova.',
+  ]} />
+  <EducationSection slot="education" title="Understand fixed deposit growth" intro="An FD maturity value combines the original deposit with interest compounded under the chosen assumptions." items={[
+    { title: 'What is an FD?', body: 'A fixed deposit places a lump sum with an institution for a chosen tenure and agreed rate, subject to that institution’s terms.' },
+    { title: 'How interest works', body: 'At each compounding date, earned interest is added to the balance so later interest can be calculated on a larger amount.' },
+    { title: 'Maturity amount', body: 'Maturity is principal plus interest before any applicable tax, TDS, penalty or adjustment.' },
+  ]} />
+</CalculatorShell>

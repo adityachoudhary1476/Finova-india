@@ -1,0 +1,222 @@
+---
+import Brand from './ui/Brand.astro';
+import Icon from './ui/Icon.astro';
+
+const links = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Guides', href: '/guides' },
+  { label: 'About', href: '/about' },
+] as const;
+---
+
+<header class="site-header">
+  <div class="site-container site-header__inner">
+    <Brand />
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <ul>
+        {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="search-link" href="/#calculator-search" aria-label="Search calculators">
+        <Icon name="search" size={20} />
+        <span>Search</span>
+        <kbd>/</kbd>
+      </a>
+
+      <details class="mobile-nav">
+        <summary aria-label="Open navigation menu">
+          <Icon name="menu" size={21} />
+          <span>Menu</span>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          <ul>
+            {links.map((link, index) => (
+              <li>
+                <a href={link.href}>
+                  <span class="mobile-nav__index tabular-nums">0{index + 1}</span>
+                  <span>{link.label}</span>
+                  <Icon name="arrow-up-right" size={18} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 50;
+    border-bottom: 1px solid var(--pc-border);
+    background: var(--pc-header-bg);
+  }
+
+  .site-header__inner {
+    display: flex;
+    min-height: 4.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .desktop-nav a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 0.5rem 0.9rem;
+    color: var(--pc-text);
+    font-size: 0.83rem;
+    font-weight: 560;
+    transition: color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .desktop-nav a:hover {
+    color: var(--pc-accent);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .search-link,
+  .mobile-nav summary {
+    display: flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--pc-border);
+    border-radius: 0;
+    background: transparent;
+    color: var(--pc-text);
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: border-color var(--pc-duration-fast) var(--pc-ease), color var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .search-link:hover,
+  .mobile-nav summary:hover {
+    border-color: var(--pc-accent);
+    color: var(--pc-accent);
+  }
+
+  .search-link > span,
+  .search-link kbd {
+    display: none;
+  }
+
+  .search-link kbd {
+    width: 1.5rem;
+    height: 1.5rem;
+    place-items: center;
+    border: 1px solid var(--pc-border);
+    border-radius: 0.25rem;
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.62rem;
+  }
+
+  .mobile-nav summary {
+    padding: 0.5rem 0.7rem;
+    list-style: none;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav summary span {
+    display: none;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    right: 0;
+    left: 0;
+    padding: 0.75rem var(--pc-gutter) 1.25rem;
+    border-bottom: 1px solid var(--pc-border-strong);
+    background: var(--pc-canvas);
+    box-shadow: var(--pc-shadow-raised);
+  }
+
+  .mobile-nav ul {
+    width: min(100%, var(--pc-container));
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mobile-nav li + li {
+    border-top: 1px solid var(--pc-border);
+  }
+
+  .mobile-nav a {
+    display: grid;
+    min-height: 4rem;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--pc-ink);
+    font-family: var(--pc-font-display);
+    font-size: 1.35rem;
+    font-weight: 520;
+  }
+
+  .mobile-nav a :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  .mobile-nav__index {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.65rem;
+  }
+
+  @media (min-width: 48rem) {
+    .desktop-nav {
+      display: block;
+      margin-left: auto;
+      margin-right: clamp(1rem, 4vw, 3rem);
+    }
+
+    .search-link {
+      padding-inline: 0.8rem;
+    }
+
+    .search-link > span {
+      display: inline;
+    }
+
+    .search-link kbd {
+      display: grid;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

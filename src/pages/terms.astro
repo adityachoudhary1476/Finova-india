@@ -1,0 +1,83 @@
+---
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+import { SITE_CONTACT } from '../config/site';
+---
+
+<StaticPageLayout
+  title="Terms of Use"
+  metaTitle="Terms of Use | Finova"
+  description="Readable terms for using Finova’s financial calculators, guides and informational content."
+  canonicalPath="/terms"
+  eyebrow="Legal and use"
+  intro="These terms explain the permitted use and practical limits of Finova’s calculators and educational content."
+  updatedDate="2026-08-17"
+  noIndex
+>
+  <section>
+    <h2>1. Acceptance of terms</h2>
+    <p>By using Finova, you agree to use the website consistently with these terms. If you do not agree, do not rely on or continue using the service.</p>
+  </section>
+
+  <section>
+    <h2>2. Use of the website</h2>
+    <p>Finova may be used for lawful personal, educational and informational purposes. Do not attempt to disrupt the website, bypass technical safeguards, overload the service or interfere with another person’s use.</p>
+  </section>
+
+  <section>
+    <h2>3. Calculator results</h2>
+    <p>Results are produced from the inputs, formulas and assumptions shown on each page. A mathematically calculated value can still differ from a lender statement, employer payroll, investment outcome, tax filing or statutory entitlement.</p>
+    <p>You are responsible for checking that inputs and assumptions match your situation.</p>
+  </section>
+
+  <section>
+    <h2>4. Accuracy and limitations</h2>
+    <p>Finova aims to make formulas and assumptions visible and uses automated tests for calculation logic. This does not guarantee that every result, rule, source or page is complete, current or error-free.</p>
+    <p>Financial rules, rates and product terms can change independently of the website.</p>
+  </section>
+
+  <section>
+    <h2>5. Financial information</h2>
+    <p>Finova provides general calculators and educational information. It does not provide personalised financial, investment, tax, legal, accounting or lending advice and does not recommend a financial product or provider.</p>
+  </section>
+
+  <section>
+    <h2>6. Intellectual property</h2>
+    <p>The Finova name, interface, original explanatory content and website presentation may be protected by applicable intellectual-property rights. Using the website does not transfer ownership of that material.</p>
+    <p>Government rules, mathematical formulas, external references and third-party names remain subject to their own status and rights.</p>
+  </section>
+
+  <section>
+    <h2>7. External links</h2>
+    <p>External links are provided for context or authoritative reference. Finova does not control an external website’s availability, content, security, terms or privacy practices.</p>
+  </section>
+
+  <section>
+    <h2>8. Availability of the service</h2>
+    <p>Pages or calculators may be corrected, updated, moved or withdrawn. Finova does not promise uninterrupted availability or that the service will meet every individual requirement.</p>
+  </section>
+
+  <section>
+    <h2>9. Limitation of responsibility</h2>
+    <p>To the extent reasonably permitted, Finova is not responsible for a decision made solely from an estimate without checking the relevant product documents, official rules or qualified professional advice. Nothing in these terms excludes responsibility that cannot legally be excluded.</p>
+  </section>
+
+  <section>
+    <h2>10. Changes to the service</h2>
+    <p>Features, formulas, assumptions and content may change to correct errors, reflect updated information or improve usability. Material rule changes should be identified on the affected calculator where practical.</p>
+  </section>
+
+  <section>
+    <h2>11. Changes to these terms</h2>
+    <p>These terms may be revised as the website changes. The “Last updated” date identifies the version currently presented.</p>
+    <p>This page is an operational website template based on the current service. Finova does not claim that it has been reviewed by a lawyer or guarantees compliance with a particular legal regime.</p>
+  </section>
+
+  <section>
+    <h2>12. Contact</h2>
+    {SITE_CONTACT.isPlaceholder ? (
+      <p>The production contact email is not configured yet. See the <a href="/contact">contact page</a> for the current placeholder status.</p>
+    ) : (
+      <p>Questions about these terms can be sent to <a href={`mailto:${SITE_CONTACT.email}`}>{SITE_CONTACT.email}</a>.</p>
+    )}
+  </section>
+</StaticPageLayout>

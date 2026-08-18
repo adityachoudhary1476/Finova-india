@@ -1,0 +1,36 @@
+---
+interface Props {
+}
+const {} = Astro.props;
+---
+
+<a class="brand" href="/" aria-label="finova">
+  <img
+    class="brand__logo"
+    src="/images/finova-header.png"
+    alt=""
+    width="751"
+    height="158"
+    loading="eager"
+    decoding="async"
+    aria-hidden="true"
+  />
+</a>
+
+<style>
+  .brand {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .brand__logo {
+    flex-shrink: 0;
+    display: block;
+    height: 2.75rem;
+    width: auto;
+    object-fit: contain;
+  }
+</style>

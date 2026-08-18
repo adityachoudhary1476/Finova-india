@@ -1,0 +1,87 @@
+---
+import type { CalculatorItem } from '../../data/types';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  calculator: CalculatorItem;
+  indexLabel: string;
+}
+
+const { calculator, indexLabel } = Astro.props;
+---
+
+<a class="directory-card" href={calculator.route}>
+  <div class="directory-card__top">
+    <span class="tabular-nums">{indexLabel}</span>
+    <span class="directory-card__icon"><Icon name={calculator.icon} size={21} /></span>
+  </div>
+  <h3>{calculator.name}</h3>
+  <p>{calculator.description}</p>
+  <footer>Open calculator <Icon name="arrow-up-right" size={18} /></footer>
+</a>
+
+<style>
+  .directory-card {
+    display: flex;
+    min-height: 18rem;
+    height: 100%;
+    flex-direction: column;
+    padding: 1.5rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+    transition: border-color var(--pc-duration-fast) var(--pc-ease), transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .directory-card:hover {
+    border-color: var(--pc-accent);
+    transform: translateY(-2px);
+  }
+
+  .directory-card__top,
+  .directory-card footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .directory-card__top > span:first-child {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.72rem;
+  }
+
+  .directory-card__icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid #99f6e4;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .directory-card h3 {
+    margin: 2.75rem 0 0.65rem;
+    font-family: var(--pc-font-display);
+    font-size: 1.65rem;
+    font-weight: 560;
+  }
+
+  .directory-card p {
+    margin: 0 0 1.5rem;
+    color: var(--pc-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .directory-card footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--pc-border);
+    color: var(--pc-accent);
+    font-size: 0.82rem;
+    font-weight: 650;
+  }
+</style>

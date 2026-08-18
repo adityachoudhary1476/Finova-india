@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import GratuityCalculator from '../../components/calculator/react/calculators/GratuityCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('gratuity');
+if (!definition) throw new Error('Gratuity calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Gratuity eligibility and final payment depend on employment status, continuity of service, applicable law and employer terms. This is not legal advice.">
+  <GratuityCalculator slot="calculator" client:load />
+  <FormulaSection slot="formula" title="How gratuity is estimated" formula="Gratuity = (Basic salary + DA) × 15 ÷ 26 × completed service years" description="The configurable statutory assumptions use fifteen days’ eligible wages for each completed year, with service beyond six months rounded as described." variables={[
+    { symbol: 'Basic', meaning: 'Last drawn monthly basic salary.' }, { symbol: 'DA', meaning: 'Dearness allowance included in eligible wages where applicable.' }, { symbol: '15 ÷ 26', meaning: 'Configured wage-day factor.' }, { symbol: 'Service', meaning: 'Completed years used after the rounding rule.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The estimate models a regular monthly-rated employee using basic salary plus entered DA.',
+    'More than six additional months is rounded to another year; exactly six months is not.',
+    'The usual five-year condition is shown separately because exceptions can apply.',
+    'The configured ₹20 lakh maximum and rule parameters can be updated centrally if notifications change.',
+  ]} />
+  <EducationSection slot="education" title="Understand gratuity" intro="The formula is simple, but eligibility and the wage definition depend on employment circumstances." items={[
+    { title: 'What is gratuity?', body: 'Gratuity is an employment benefit generally linked to eligible wages and completed service when employment ends under covered circumstances.' },
+    { title: 'How it is calculated', body: 'The estimate applies a fifteen-day wage factor to each completed service year after the configured rounding rule.' },
+    { title: 'Why assumptions matter', body: 'Fixed-term employment, death, disablement, better employer terms and statutory changes can affect eligibility or amount.' },
+  ]} />
+</CalculatorShell>

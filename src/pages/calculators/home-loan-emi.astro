@@ -1,0 +1,27 @@
+---
+import CalculatorShell from '../../components/calculator/CalculatorShell.astro';
+import FormulaSection from '../../components/calculator/FormulaSection.astro';
+import AssumptionsSection from '../../components/calculator/AssumptionsSection.astro';
+import EducationSection from '../../components/calculator/EducationSection.astro';
+import LoanVariantCalculator from '../../components/calculator/react/calculators/LoanVariantCalculator';
+import { calculatorBySlug } from '../../data/calculators';
+const definition = calculatorBySlug.get('home-loan-emi');
+if (!definition) throw new Error('Home loan EMI calculator metadata is missing.');
+---
+<CalculatorShell definition={definition} disclaimer="Actual home loan EMI and cost can differ because of floating-rate changes, fees, insurance, payment dates and lender terms.">
+  <LoanVariantCalculator slot="calculator" variant="home" client:load />
+  <FormulaSection slot="formula" title="How home loan EMI is calculated" formula="EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1)" description="The same standard reducing-balance method used by the general EMI calculator is applied to the financed home loan principal." variables={[
+    { symbol: 'P', meaning: 'Home loan principal.' }, { symbol: 'r', meaning: 'Monthly rate: annual rate ÷ 12 ÷ 100.' }, { symbol: 'n', meaning: 'Total monthly instalments.' }, { symbol: 'EMI', meaning: 'Estimated equal monthly payment.' },
+  ]} />
+  <AssumptionsSection slot="assumptions" items={[
+    'The interest rate remains fixed for the projection; floating-rate resets are not modelled.',
+    'The entered processing fee is treated as an upfront cost and does not increase the loan principal.',
+    'Insurance, legal charges, taxes, prepayments and lender-specific rounding are excluded.',
+    'The amortisation schedule uses monthly reducing-balance repayments.',
+  ]} />
+  <EducationSection slot="education" title="Understand home loan EMI" intro="Rate, tenure and principal work together to determine both the monthly payment and the full borrowing cost." items={[
+    { title: 'What is a home loan EMI?', body: 'It is the monthly amount used to repay principal and interest. Early instalments usually contain a larger interest share.' },
+    { title: 'What affects EMI?', body: 'A larger principal or higher rate increases EMI. A longer tenure can reduce EMI while increasing total interest.' },
+    { title: 'How the schedule helps', body: 'The schedule shows how much principal is still outstanding after each year and how the interest share changes.' },
+  ]} />
+</CalculatorShell>

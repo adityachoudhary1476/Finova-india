@@ -1,0 +1,84 @@
+---
+interface EducationItem {
+  title: string;
+  body: string;
+}
+
+interface Props {
+  title: string;
+  intro: string;
+  items: readonly EducationItem[];
+}
+
+const { title, intro, items } = Astro.props;
+---
+
+<section class="education content-section" aria-labelledby="education-title">
+  <div class="content-section__heading">
+    <span class="eyebrow">Learn the idea</span>
+    <h2 id="education-title">{title}</h2>
+    <p>{intro}</p>
+  </div>
+  <div class="education__grid">
+    {items.map((item, index) => (
+      <article>
+        <span class="tabular-nums">0{index + 1}</span>
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .education__grid {
+    display: grid;
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .education article {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--pc-border);
+  }
+
+  .education article > span {
+    color: var(--pc-accent);
+    font-family: var(--pc-font-mono);
+    font-size: 0.72rem;
+  }
+
+  .education h3 {
+    margin: 1.5rem 0 0.65rem;
+    font-family: var(--pc-font-display);
+    font-size: 1.45rem;
+    font-weight: 560;
+    letter-spacing: -0.025em;
+  }
+
+  .education article p {
+    max-width: 31rem;
+    margin: 0;
+    color: var(--pc-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 40rem) {
+    .education__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .education article {
+      padding: 1.75rem;
+    }
+
+    .education article:nth-child(odd) {
+      padding-left: 0;
+      border-right: 1px solid var(--pc-border);
+    }
+
+    .education article:nth-child(even) {
+      padding-right: 0;
+    }
+  }
+</style>

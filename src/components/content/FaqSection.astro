@@ -1,0 +1,126 @@
+---
+import type { GuideFaqItem } from '../../data/types';
+
+interface Props {
+  items: readonly GuideFaqItem[];
+  title?: string;
+}
+
+const { items, title = 'Frequently asked questions' } = Astro.props;
+---
+
+<section class="faq-section" aria-labelledby="faq-title">
+  <header>
+    <span class="eyebrow">Questions, answered</span>
+    <h2 id="faq-title">{title}</h2>
+  </header>
+  <div class="faq-section__items">
+    {items.map((item, index) => (
+      <details>
+        <summary>
+          <span class="tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+          <strong>{item.question}</strong>
+          <i aria-hidden="true"></i>
+        </summary>
+        <p>{item.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    display: grid;
+    gap: 2rem;
+    padding-top: clamp(3rem, 7vw, 5rem);
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .faq-section h2 {
+    max-width: 16ch;
+    margin: 1rem 0 0;
+    font-family: var(--pc-font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 540;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  .faq-section__items {
+    border-top: 1px solid var(--pc-border-strong);
+  }
+
+  .faq-section details {
+    border-bottom: 1px solid var(--pc-border-strong);
+  }
+
+  .faq-section summary {
+    display: grid;
+    min-height: 4.5rem;
+    grid-template-columns: 2rem 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-section summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-section summary > span {
+    color: var(--pc-muted);
+    font-family: var(--pc-font-mono);
+    font-size: 0.62rem;
+  }
+
+  .faq-section summary strong {
+    color: var(--pc-ink);
+    font-size: 0.84rem;
+    font-weight: 630;
+  }
+
+  .faq-section summary i {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .faq-section summary i::before,
+  .faq-section summary i::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.8rem;
+    height: 1px;
+    background: var(--pc-accent);
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-section summary i::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .faq-section details[open] summary i::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .faq-section details p {
+    max-width: 48rem;
+    margin: 0;
+    padding: 0 0 1.5rem 2.75rem;
+    color: var(--pc-text);
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 64rem) {
+    .faq-section {
+      grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import StaticPageLayout from '../layouts/StaticPageLayout.astro';
+---
+
+<StaticPageLayout
+  title="Calculation Methodology"
+  metaTitle="Methodology | Finova"
+  description="How Finova handles formulas, assumptions, rounding, Indian number formatting, changing financial rules and calculator testing."
+  canonicalPath="/methodology"
+  eyebrow="How the tools are built"
+  intro="Finova’s methodology is simple: separate the financial logic from the interface, show the assumptions, and never present an estimate as a guarantee."
+  updatedDate="2026-08-17"
+>
+  <section>
+    <h2>Formulas and calculation engines</h2>
+    <p>Each calculator calls a typed calculation function that is separate from the React interface. This keeps formulas deterministic and allows the same EMI or compound-interest method to be reused instead of copied between pages.</p>
+    <p>The formula section on a calculator page is intended to describe the method actually used by its calculation engine.</p>
+  </section>
+
+  <section>
+    <h2>Inputs and assumptions</h2>
+    <p>A result is only as useful as its inputs. Finova validates required ranges and prevents malformed values from reaching a formula. Optional fields remain visible rather than being silently invented.</p>
+    <p>Where a calculator simplifies real-world behaviour—for example, by using a fixed rate throughout a projection—the assumption is stated on the page.</p>
+  </section>
+
+  <section>
+    <h2>Rounding and displayed values</h2>
+    <p>Calculations use numeric values rather than formatted strings. Currency is normally rounded for display while underlying calculations retain greater precision. A lender, employer or institution may round at a different stage and produce a small difference.</p>
+  </section>
+
+  <section>
+    <h2>Indian number formatting</h2>
+    <p>Financial values use the Indian grouping system—for example, ₹1,00,000 and ₹1,00,00,000—through shared formatting utilities. Calculator logic receives raw numbers; formatting is applied only when values are presented.</p>
+  </section>
+
+  <section>
+    <h2>Changing financial rules</h2>
+    <p>Tax slabs, EPF and PPF rates, gratuity parameters and other statutory assumptions can change. Finova keeps those values in identifiable configuration and shows an applicable year, editable rate or source notice where the implementation provides one.</p>
+    <p>A source confirms the basis used for an assumption; it does not make Finova an official authority. Users should check current government material for important decisions.</p>
+  </section>
+
+  <section>
+    <h2>Testing</h2>
+    <p>Automated tests cover the current calculation engines, Indian number formatting, normal examples and edge cases such as zero rates, invalid values and large durations. TypeScript and production builds are also checked before release.</p>
+    <p>These checks are internal software tests. Finova does not claim independent professional verification, certification or legal review.</p>
+  </section>
+
+  <section>
+    <h2>Estimate versus actual value</h2>
+    <ul>
+      <li><strong>Calculated result:</strong> arithmetic produced from the entered values and stated formula.</li>
+      <li><strong>Estimate:</strong> a calculated result that may differ because real terms or circumstances are not fully represented.</li>
+      <li><strong>Projection:</strong> a future value based on a rate or growth assumption.</li>
+      <li><strong>Statutory assumption:</strong> a configured rule that may depend on year, eligibility and official interpretation.</li>
+      <li><strong>Advice:</strong> a personalised recommendation—which Finova does not provide.</li>
+    </ul>
+  </section>
+</StaticPageLayout>

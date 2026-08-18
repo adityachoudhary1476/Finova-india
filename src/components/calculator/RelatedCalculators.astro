@@ -1,0 +1,130 @@
+---
+import type { CalculatorItem } from '../../data/types';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  calculators: readonly CalculatorItem[];
+}
+
+const { calculators } = Astro.props;
+---
+
+<section class="related content-section" aria-labelledby="related-title">
+  <div class="content-section__heading">
+    <span class="eyebrow">Keep exploring</span>
+    <h2 id="related-title">Related calculators</h2>
+    <p>Continue with another useful financial calculation.</p>
+  </div>
+  <div class="related__grid">
+    {calculators.map((calculator) => (
+      calculator.availability === 'live' ? (
+        <a href={calculator.route}>
+          <span class="related__icon"><Icon name={calculator.icon} size={19} /></span>
+          <div>
+            <h3>{calculator.name}</h3>
+            <p>{calculator.description}</p>
+          </div>
+          <Icon name="arrow-up-right" size={18} class="related__arrow" />
+        </a>
+      ) : (
+        <article aria-label={`${calculator.name}, coming soon`}>
+          <span class="related__icon"><Icon name={calculator.icon} size={19} /></span>
+          <div>
+            <h3>{calculator.name}</h3>
+            <p>{calculator.description}</p>
+          </div>
+          <span class="related__status">Coming soon</span>
+        </article>
+      )
+    ))}
+  </div>
+  <a class="related__all" href="/calculators">Browse all calculators <Icon name="arrow-up-right" size={17} /></a>
+</section>
+
+<style>
+  .related__grid {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .related__grid > a,
+  .related__grid > article {
+    display: grid;
+    min-height: 8.75rem;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--pc-border);
+    border-radius: var(--pc-radius-lg);
+    background: var(--pc-surface);
+  }
+
+  .related__grid > a {
+    transition: border-color var(--pc-duration-fast) var(--pc-ease), transform var(--pc-duration-fast) var(--pc-ease);
+  }
+
+  .related__grid > a:hover {
+    border-color: var(--pc-accent);
+    transform: translateY(-2px);
+  }
+
+  .related__grid > article {
+    background: rgb(255 255 255 / 0.55);
+  }
+
+  .related__icon {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid #99f6e4;
+    border-radius: var(--pc-radius-md);
+    background: var(--pc-accent-wash);
+    color: var(--pc-accent);
+  }
+
+  .related h3 {
+    margin: 0 0 0.35rem;
+    font-family: var(--pc-font-display);
+    font-size: 1.2rem;
+    font-weight: 560;
+  }
+
+  .related__grid p {
+    margin: 0;
+    color: var(--pc-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .related__arrow {
+    color: var(--pc-accent);
+  }
+
+  .related__status {
+    color: var(--pc-muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .related__all {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    color: var(--pc-accent);
+    font-size: 0.85rem;
+    font-weight: 650;
+  }
+
+  @media (min-width: 64rem) {
+    .related__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
