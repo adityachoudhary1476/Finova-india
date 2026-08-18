@@ -17,11 +17,46 @@ if (!definition) throw new Error('Salary calculator metadata is missing.');
     'Employer-side benefits are entered by the user rather than inferred from a standard salary structure.',
     'Employee EPF is calculated only from the basic salary and percentage entered.',
     'Professional tax and other deductions are applied only when entered.',
+    'Monthly figures are the annual figures divided by 12; some payrolls prorate differently.',
     'Income tax, bonuses, reimbursements and variable pay are not included in the in-hand result.',
   ]} />
-  <EducationSection slot="education" title="Understand salary terminology" intro="CTC, gross and in-hand salary describe different layers of an employee compensation structure." items={[
-    { title: 'CTC vs gross salary', body: 'CTC can include employer PF, gratuity, insurance or other benefits that do not appear as monthly gross pay.' },
-    { title: 'Gross vs net salary', body: 'Gross salary is before employee deductions. Net or in-hand salary is what remains after payroll deductions.' },
-    { title: 'Common deductions', body: 'Employee EPF, professional tax, income tax and employer-specific recoveries can reduce take-home pay.' },
+  <EducationSection slot="education" title="Understanding CTC, gross and in-hand salary" intro="The calculator estimates monthly in-hand salary from the salary structure you enter. These sections explain each layer and how the estimate is built." items={[
+    { title: 'What this calculator does', body: 'It estimates your monthly in-hand salary from the inputs it supports: the top-line annual amount (CTC or gross), annual basic salary, employee EPF rate, professional tax and other deductions. "In-hand salary" here means the amount remaining after the deductions this calculator represents. Actual payroll can differ depending on an employer’s salary structure, benefits, deductions, tax treatment and other factors, so treat the result as an estimate rather than a guaranteed figure.' },
+    { title: 'CTC, gross and in-hand: the layers', body: 'CTC (cost to company) is the total annual cost of employing you, which can include employer-side benefits such as employer PF, gratuity or insurance that never appear in monthly pay. Gross salary is what remains before employee-side deductions. In-hand salary is what is left after the deductions the calculator models: employee EPF, professional tax and other entered deductions.' },
+    { title: 'How the calculation works', bullets: [
+      'Top-line input: annual CTC or annual gross salary, whichever you select.',
+      'Employer-side benefits: subtracted from CTC (and only CTC) to reach annual gross salary.',
+      'Employee EPF: annual basic salary × the entered employee contribution rate.',
+      'Professional tax and other deductions: applied when entered.',
+      'Annual take-home: annual gross salary minus total deductions.',
+      'Monthly in-hand: annual take-home divided by 12.',
+    ] },
+    { title: 'Example — for illustration only', paragraphs: [
+      'These figures were calculated with the same function this calculator uses. Inputs: annual CTC ₹12,00,000, employer-side benefits ₹57,600, annual basic salary ₹4,80,000, employee EPF 12%, professional tax ₹2,400, other deductions ₹0.',
+    ], bullets: [
+      'Annual gross salary: ₹12,00,000 − ₹57,600 = ₹11,42,400 (monthly ₹95,200).',
+      'Employee EPF: ₹4,80,000 × 12% = ₹57,600 per year.',
+      'Total deductions: ₹57,600 (EPF) + ₹2,400 (professional tax) + ₹0 = ₹60,000.',
+      'Estimated annual take-home: ₹11,42,400 − ₹60,000 = ₹10,82,400.',
+      'Estimated monthly in-hand: ₹10,82,400 ÷ 12 = ₹90,200.',
+      'Actual payslips can differ — an employer’s salary structure, tax withholding and payroll-specific deductions may change the numbers.',
+    ] },
+    { title: 'Why CTC and in-hand are different', body: 'A ₹12,00,000 CTC rarely means ₹1,00,000 in your bank account each month. Employer-side benefits within the CTC are costs an employer pays that are not part of monthly gross pay. Employee EPF, professional tax and other payroll deductions then reduce gross pay further. The calculator shows each of these layers so the gap between CTC and in-hand is transparent.', links: [
+      { label: 'Gratuity Calculator', href: '/calculators/gratuity' },
+    ] },
+    { title: 'Deductions this calculator models', bullets: [
+      'Employee EPF: estimated from the entered basic salary and rate.',
+      'Professional tax: applied only when entered, if your state or payroll charges it.',
+      'Other deductions: optional entered amounts such as insurance or recoveries.',
+      'Not modelled: income tax, bonuses, reimbursements and variable pay.',
+    ], links: [
+      { label: 'EPF Calculator', href: '/calculators/epf' },
+    ] },
+    { title: 'Income tax is not deducted here', body: 'This estimator keeps income tax separate so the salary assumptions stay transparent. To estimate income tax under the old and new regimes for FY 2025-26, use the dedicated income tax calculator and subtract its result from take-home pay yourself.', links: [
+      { label: 'Income Tax Calculator', href: '/calculators/income-tax' },
+    ] },
+    { title: 'Where to learn more', body: 'The in-hand salary guide walks through the full journey from CTC to net pay with worked numbers, including how EPF, gratuity and tax shape the final figure.', links: [
+      { label: 'How in-hand salary is calculated from CTC', href: '/guides/in-hand-salary-from-ctc' },
+    ] },
   ]} />
 </CalculatorShell>

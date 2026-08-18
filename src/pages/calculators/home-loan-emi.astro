@@ -19,9 +19,22 @@ if (!definition) throw new Error('Home loan EMI calculator metadata is missing.'
     'Insurance, legal charges, taxes, prepayments and lender-specific rounding are excluded.',
     'The amortisation schedule uses monthly reducing-balance repayments.',
   ]} />
-  <EducationSection slot="education" title="Understand home loan EMI" intro="Rate, tenure and principal work together to determine both the monthly payment and the full borrowing cost." items={[
-    { title: 'What is a home loan EMI?', body: 'It is the monthly amount used to repay principal and interest. Early instalments usually contain a larger interest share.' },
-    { title: 'What affects EMI?', body: 'A larger principal or higher rate increases EMI. A longer tenure can reduce EMI while increasing total interest.' },
-    { title: 'How the schedule helps', body: 'The schedule shows how much principal is still outstanding after each year and how the interest share changes.' },
+  <EducationSection slot="education" title="Understand home loan repayment" intro="Property price, down payment, rate and tenure work together to determine both the monthly payment and the full borrowing cost." items={[
+    { title: 'How a home loan EMI works', body: 'A home loan EMI is the fixed monthly payment that covers principal and interest on the amount borrowed. Interest is charged on the reducing balance, so early instalments carry a larger interest share and later instalments pay down principal faster. Because home-loan tenures are long, the balance stays substantial for many years.' },
+    { title: 'Property price, down payment and loan amount', body: 'The loan amount is what you borrow after your down payment. A larger down payment means a smaller loan, which reduces both the monthly EMI and the total interest. This calculator takes the loan amount directly, so enter the figure you plan to finance — and compare a few down-payment scenarios to see how the loan amount changes the cost.' },
+    { title: 'How tenure affects EMI and total interest', body: 'Tenure is the biggest driver of the gap between monthly EMI and total interest on a home loan. A longer tenure spreads the loan across more instalments, lowering the EMI but increasing total interest. A shorter tenure raises the EMI but reduces the interest paid over the life of the loan.' },
+    { title: 'How the interest rate affects repayment', body: 'The rate decides how much of each payment is interest. Over a 20-year loan, even a small change in rate moves the EMI and, more importantly, the total interest by a meaningful amount. Many home loans carry floating rates that change over the tenure; this calculator assumes a single constant rate for the projection.' },
+    { title: 'Why long tenures can mean substantial total interest', body: 'On a typical long home-loan tenure, total interest can approach or exceed the amount borrowed: at a constant rate, a ₹40,00,000 loan over 20 years can accrue more in interest than in principal repayments. That is simply what happens when a large balance carries interest for two decades — which is why comparing tenures and planning prepayments matters.' },
+    { title: 'How prepayments affect outstanding principal and interest', body: 'A prepayment reduces the outstanding principal earlier than scheduled. Because future interest is calculated on the smaller balance, the total interest over the loan\u2019s life can fall. Lenders may apply a prepayment by shortening the tenure, reducing the EMI, or offering a choice — and may charge a fee. Check the loan agreement before assuming the benefit.' },
+    { title: 'Worked example: a ₹40,00,000 home loan', paragraphs: [
+      'Loan amount ₹40,00,000 at 8.5% annual interest for 20 years (240 monthly instalments), with a ₹20,000 processing fee.',
+      'Monthly EMI: ₹34,713. Total payable: ₹83,31,103, of which ₹43,31,103 is interest. Adding the processing fee gives a total outflow of ₹83,51,103.',
+      'The same loan over 15 years (180 instalments): EMI ₹39,390, but total interest falls to ₹30,90,125. The higher monthly payment saves roughly ₹12,41,000 in interest.',
+      'This example follows the same formula the calculator uses and assumes the entered rate stays constant.',
+    ] },
+    { title: 'When this calculator is useful', body: 'Use it to compare tenures, check how a different down payment changes the loan amount and EMI, or estimate the full cost of a home loan before speaking to a lender. The tax treatment of home-loan interest and principal is separate from this repayment arithmetic and is outside the calculator\u2019s scope.', links: [
+      { label: 'General EMI Calculator', href: '/calculators/emi' },
+      { label: 'Car Loan EMI Calculator', href: '/calculators/car-loan-emi' },
+    ] },
   ]} />
 </CalculatorShell>

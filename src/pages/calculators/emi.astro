@@ -19,19 +19,48 @@ const assumptions = [
 const education = [
   {
     title: 'What is EMI?',
-    body: 'EMI means Equated Monthly Instalment—the fixed amount paid each month toward principal and interest. Early payments usually contain more interest; later payments reduce more principal.',
+    body: 'An equated monthly instalment is the fixed amount you pay each month while a loan is outstanding. Every payment contains two parts: a portion of the principal you borrowed and the interest charged on the balance still owed. The EMI stays the same every month, but the split between principal and interest keeps changing.',
   },
   {
-    title: 'What affects EMI?',
-    body: 'A larger loan or higher rate increases EMI. A longer tenure usually lowers the monthly payment but can increase the total interest paid over the life of the loan.',
+    title: 'How reducing-balance interest works',
+    body: 'Finova\u2019s calculator uses the standard reducing-balance method. Interest is charged only on the amount still outstanding, not on the original loan amount. Because each payment reduces the balance, the next month\u2019s interest is calculated on a smaller figure.',
   },
   {
-    title: 'How is interest reduced?',
-    body: 'A prepayment reduces outstanding principal. If the lender applies it without a large charge, future interest is calculated on a smaller balance. Actual treatment depends on the loan agreement.',
+    title: 'The EMI formula in plain words',
+    body: 'EMI = P × r × (1 + r)ⁿ ÷ ((1 + r)ⁿ − 1), where P is the amount borrowed, r is the monthly rate (annual rate ÷ 12 ÷ 100) and n is the number of monthly instalments. The formula spreads principal and interest into equal payments so the loan clears exactly on the final instalment.',
   },
   {
-    title: 'How to read the schedule',
-    body: 'Opening balance is what remains at the start of a year. Principal paid reduces the debt; interest paid is the borrowing cost; closing balance carries into the next year.',
+    title: 'Principal vs interest, and reading the schedule',
+    body: 'Early in the loan, the outstanding balance is at its highest, so most of each EMI goes toward interest. As the balance falls, the interest share shrinks and more of the payment goes toward principal. The annual schedule on this page shows the opening balance, principal paid, interest paid and closing balance for each year, making that shift visible.',
+  },
+  {
+    title: 'How the interest rate affects EMI',
+    body: 'A higher rate raises both the monthly EMI and the total interest, because every remaining instalment becomes more expensive. Even a difference of one percentage point can be noticeable on a multi-year loan.',
+  },
+  {
+    title: 'How tenure affects EMI and total interest',
+    body: 'A longer tenure spreads the loan across more payments, which lowers the monthly EMI but leaves interest building for longer. A shorter tenure raises the EMI but cuts the total interest. The two usually move in opposite directions, which is why comparing tenures is one of the most useful things this calculator can do.',
+  },
+  {
+    title: 'How prepayments can reduce total interest',
+    body: 'A prepayment reduces the outstanding principal earlier than scheduled. Future interest is then charged on a smaller balance, which can lower the total interest over the life of the loan. The actual benefit depends on lender terms, including any prepayment charges and whether the lender shortens the tenure, reduces the EMI, or allows a choice.',
+  },
+  {
+    title: 'Worked example: a ₹5,00,000 loan',
+    paragraphs: [
+      'Loan amount ₹5,00,000 at 11% annual interest for 3 years (36 monthly instalments).',
+      'Monthly EMI: ₹16,369. Total payable: ₹5,89,297, of which ₹89,297 is interest.',
+      'The same loan over 5 years (60 instalments): EMI ₹10,871, but total interest rises to ₹1,52,273 and total payable to ₹6,52,273. The lower monthly payment comes at a noticeably higher overall cost.',
+      'This example follows the same formula the calculator uses, with a constant rate for the full tenure.',
+    ],
+  },
+  {
+    title: 'When to use the general EMI calculator',
+    body: 'Use this calculator when you know the loan amount, rate and tenure and want a clear picture of the monthly payment, total interest and repayment cost — for example a personal loan, education loan, business loan or gold loan. For home and car purchases, the dedicated tools model down payments and processing fees, so start there instead.',
+    links: [
+      { label: 'Home Loan EMI Calculator', href: '/calculators/home-loan-emi' },
+      { label: 'Car Loan EMI Calculator', href: '/calculators/car-loan-emi' },
+    ],
   },
 ] as const;
 ---
@@ -58,8 +87,8 @@ const education = [
   <AssumptionsSection slot="assumptions" items={assumptions} />
   <EducationSection
     slot="education"
-    title="Understand your loan repayment"
-    intro="The monthly number is only one part of a loan. Tenure, rate and total interest explain the full borrowing cost."
+    title="Understand EMI on Indian loans"
+    intro="The monthly payment is only one part of a loan. Rate, tenure and total interest explain the full borrowing cost."
     items={education}
   />
 </CalculatorShell>

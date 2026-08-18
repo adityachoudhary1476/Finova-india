@@ -23,6 +23,7 @@ const homeStructuredData = {
       url: homeUrl,
       description,
       inLanguage: 'en-IN',
+      logo: new URL('/favicon.svg', Astro.site ?? Astro.url.origin).toString(),
     },
     {
       '@type': 'WebPage',

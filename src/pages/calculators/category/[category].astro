@@ -22,8 +22,13 @@ const { category } = Astro.props;
 const calculators = getLiveCalculatorsByCategory(category.id);
 const calculatorIds = new Set(calculators.map((calculator) => calculator.id));
 const relatedGuides = guides.filter((guide) => guide.relatedCalculatorIds.some((id) => calculatorIds.has(id)));
-const title = `${category.title} Calculators for India | Finova`;
-const description = `${category.description} Browse ${calculators.length} free ${category.title.toLowerCase()} calculators with formulas, assumptions and Indian number formatting.`;
+const categoryAdjective: Readonly<Record<string, string>> = {
+  investments: 'Investment',
+  loans: 'Loan',
+};
+const categoryNoun = categoryAdjective[category.id] ?? category.title;
+const title = `${categoryNoun} Calculators for India | Finova`;
+const description = `${category.description} Browse ${calculators.length} free ${categoryNoun.toLowerCase()} calculators with formulas, assumptions and Indian number formatting.`;
 const route = `/calculators/category/${category.id}`;
 const pageUrl = new URL(route, Astro.site ?? Astro.url.origin).toString();
 const calculatorsUrl = new URL('/calculators', Astro.site ?? Astro.url.origin).toString();
@@ -69,7 +74,7 @@ const structuredData = {
     <header class="category-page__header">
       <span class="category-page__icon"><Icon name={category.icon} size={22} /></span>
       <span class="eyebrow">Calculator category</span>
-      <h1>{category.title} calculators</h1>
+      <h1>{categoryNoun} calculators</h1>
       <p>{category.description} Choose from {calculators.length} working tools below.</p>
     </header>
 

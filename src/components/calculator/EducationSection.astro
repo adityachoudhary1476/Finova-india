@@ -1,7 +1,17 @@
 ---
+import Icon from '../ui/Icon.astro';
+
+interface EducationLink {
+  label: string;
+  href: string;
+}
+
 interface EducationItem {
   title: string;
-  body: string;
+  body?: string;
+  paragraphs?: readonly string[];
+  bullets?: readonly string[];
+  links?: readonly EducationLink[];
 }
 
 interface Props {
@@ -24,7 +34,23 @@ const { title, intro, items } = Astro.props;
       <article>
         <span class="tabular-nums">0{index + 1}</span>
         <h3>{item.title}</h3>
-        <p>{item.body}</p>
+        {item.paragraphs
+          ? item.paragraphs.map((paragraph) => <p>{paragraph}</p>)
+          : item.body && <p>{item.body}</p>}
+        {item.bullets && item.bullets.length > 0 && (
+          <ul>
+            {item.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+        )}
+        {item.links && item.links.length > 0 && (
+          <ul class="education__links">
+            {item.links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label} <Icon name="arrow-up-right" size={16} /></a>
+              </li>
+            ))}
+          </ul>
+        )}
       </article>
     ))}
   </div>
@@ -61,6 +87,55 @@ const { title, intro, items } = Astro.props;
     color: var(--pc-muted);
     font-size: 0.92rem;
     line-height: 1.65;
+  }
+
+  .education article p + p {
+    margin-top: 0.8rem;
+  }
+
+  .education article ul {
+    display: grid;
+    gap: 0.45rem;
+    max-width: 31rem;
+    margin: 0.75rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .education article ul:not(.education__links) li {
+    color: var(--pc-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .education article ul:not(.education__links) li::marker {
+    color: var(--pc-accent);
+  }
+
+  .education__links {
+    margin-top: 1rem;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .education__links a {
+    display: inline-flex;
+    min-height: 2.5rem;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--pc-accent);
+    font-size: 0.85rem;
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  .education__links a :global(svg) {
+    color: var(--pc-accent);
+  }
+
+  .education__links li + li {
+    margin-top: 0.2rem;
   }
 
   @media (min-width: 40rem) {

@@ -19,9 +19,22 @@ if (!definition) throw new Error('Car loan EMI calculator metadata is missing.')
     'Processing fee is an upfront cost and is not financed in this estimate.',
     'Insurance, registration, accessories, foreclosure and lender-specific charges are excluded.',
   ]} />
-  <EducationSection slot="education" title="Understand car loan repayment" intro="The amount financed—not only the car price—determines monthly EMI and interest." items={[
-    { title: 'What is car loan EMI?', body: 'It is the monthly principal-and-interest payment on the financed portion of the car amount.' },
-    { title: 'Effect of down payment', body: 'A larger down payment lowers financed principal, which usually reduces EMI and total interest.' },
-    { title: 'Interest and tenure', body: 'Longer tenure can lower the monthly payment but leaves interest accruing for more months.' },
+  <EducationSection slot="education" title="Understand car loan repayment" intro="The financed amount — not only the car price — determines monthly EMI and interest. Down payment, rate, tenure and fees each play a part." items={[
+    { title: 'Car price, down payment and financed amount', body: 'The financed amount is the car price minus your down payment, and it is the only part that earns interest. The calculator works out this figure for you. Because interest is charged on the financed amount, your down payment directly shapes both the EMI and the total cost of the loan.' },
+    { title: 'How the financed amount affects EMI', body: 'A larger financed amount means a higher EMI and more total interest at the same rate and tenure. The effect is straightforward: every extra rupee financed must be repaid with interest. Keeping the financed amount smaller is one of the clearest ways to lower the cost of a car loan.' },
+    { title: 'How the interest rate affects EMI', body: 'The rate determines the cost of borrowing the financed amount. A higher rate raises the EMI and the total interest; a lower rate does the reverse. Car-loan rates are set by lenders, so the rate you actually get can differ from the one you test here.' },
+    { title: 'How tenure affects EMI and total interest', body: 'Longer tenures lower the monthly payment but leave the balance outstanding — and accruing interest — for more months. Shorter tenures cost more per month but less overall. Compare a couple of tenures to find the balance that fits your monthly cash flow and total-cost preference.' },
+    { title: 'Processing fees', body: 'A processing fee is an upfront charge, typically paid once when the loan is disbursed. This calculator treats it as a separate upfront cost: it does not increase the financed amount or the EMI, but it is added to the total outflow. Insurance, registration and accessories are excluded, so the total here is not the full cost of owning the car.' },
+    { title: 'Total repayment and total outflow', body: 'Total repayment is the sum of all EMIs: the financed amount plus interest. Total outflow goes further and adds the down payment and the processing fee — the complete cash paid for the car and the loan together. Watching total outflow keeps the down payment and the loan cost in one number.' },
+    { title: 'Worked example: a ₹10,00,000 car', paragraphs: [
+      'Car price ₹10,00,000 with a ₹3,00,000 down payment, leaving ₹7,00,000 financed at 9.5% annual interest for 5 years (60 monthly instalments), with a ₹5,000 processing fee.',
+      'Monthly EMI: ₹14,701. Total repayment: ₹8,82,078, of which ₹1,82,078 is interest. Total outflow: ₹11,87,078 (down payment + repayments + fee).',
+      'With a ₹5,00,000 down payment, the financed amount falls to ₹5,00,000: EMI ₹10,501 and total interest ₹1,30,056. The larger down payment lowers both the monthly payment and the interest.',
+      'This example follows the same formula the calculator uses and assumes a constant rate for the full tenure.',
+    ] },
+    { title: 'When this calculator is useful', body: 'Use it to compare down payments, test how a different tenure changes the monthly payment and total cost, or get a complete figure — car price, down payment, EMIs and fee — before approaching a lender.', links: [
+      { label: 'General EMI Calculator', href: '/calculators/emi' },
+      { label: 'Home Loan EMI Calculator', href: '/calculators/home-loan-emi' },
+    ] },
   ]} />
 </CalculatorShell>

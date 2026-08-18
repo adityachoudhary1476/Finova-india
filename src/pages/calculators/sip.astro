@@ -19,19 +19,60 @@ const assumptions = [
 const education = [
   {
     title: 'What is a SIP?',
-    body: 'A Systematic Investment Plan is a way to invest a fixed amount at regular intervals. The calculator models monthly contributions; it does not evaluate or recommend any investment product.',
+    body: 'A Systematic Investment Plan invests a fixed amount at regular intervals, usually every month. This calculator models a monthly contribution and projects its estimated value at an annual return you choose. It does not evaluate or recommend any mutual fund or investment product.',
   },
   {
-    title: 'How SIP returns work',
-    body: 'Every contribution gets a different amount of time to grow. Earlier contributions compound for longer, while later ones spend fewer months in the projection.',
+    title: 'How the calculation works',
+    body: 'Each contribution is treated as invested at the beginning of the month, and the annual return you enter is converted to a monthly rate. Every instalment then compounds for a different length of time: the earliest contributions grow for the longest period, while the latest grow for only a month.',
   },
   {
-    title: 'Why compounding matters',
-    body: 'If growth is positive, returns can begin generating additional returns. Over longer periods, this can widen the gap between the amount contributed and the estimated value.',
+    title: 'What this calculator assumes',
+    paragraphs: [
+      'Contributions are invested at the start of each month for the full period.',
+      'The entered annual return is converted to a monthly rate and stays constant for the whole projection.',
+      'Market volatility, taxes, fund fees, expense ratios and missed contributions are not modelled.',
+      'The result is an illustration built on these assumptions, not a promise of what the investment will be worth.',
+    ],
   },
   {
-    title: 'Why the result is an estimate',
-    body: 'Real market returns do not arrive at one fixed rate every month. The constant rate is a planning assumption that makes scenarios comparable, not a forecast or promise.',
+    title: 'Amount invested vs estimated returns vs estimated future value',
+    paragraphs: [
+      'Amount invested is the monthly contribution multiplied by the number of months — the money you actually put in.',
+      'Estimated returns are the growth the assumed rate produces on top of your contributions.',
+      'Estimated future value is the two added together: the projected value at the end of the period.',
+      'Keeping these three numbers separate is the clearest way to read any projection.',
+    ],
+  },
+  {
+    title: 'Worked example: ₹5,000 per month',
+    paragraphs: [
+      'Monthly contribution ₹5,000, assumed annual return 12%, period 15 years (180 monthly instalments).',
+      'Amount invested: ₹9,00,000. Estimated returns: ₹16,22,880. Estimated future value: ₹25,22,880.',
+      'This example uses the same formula and convention as the calculator above: contributions at the start of each month, with the annual rate divided by 12 and applied monthly.',
+      'It is an illustration based on the assumed return, not a forecast.',
+    ],
+  },
+  {
+    title: 'What happens when the monthly amount increases',
+    body: 'At the same rate and period, the projection scales with the contribution: a ₹10,000 monthly SIP at 12% for 15 years estimates to ₹50,45,760, with ₹18,00,000 invested and ₹32,45,760 of estimated returns. Doubling the amount you invest doubles the estimated future value under this constant-rate assumption.',
+  },
+  {
+    title: 'How the period affects compounding',
+    body: 'Time has a compounding effect: the longer the period, the more months each contribution earns interest on earlier interest. Extending the same ₹5,000 monthly SIP from 15 to 20 years raises the amount invested from ₹9,00,000 to ₹12,00,000, while the estimated future value rises from ₹25,22,880 to ₹49,95,740. Most of that extra growth comes from three additional years of compounding.',
+  },
+  {
+    title: 'The assumed return is an input, not a promise',
+    body: 'The return you enter is an assumption used to make scenarios comparable. Real market returns vary from year to year and can be negative. The actual value of the investment at the end of the period can be higher or lower than the projection, and nothing on this page is guaranteed.',
+  },
+  {
+    title: 'SIP vs lump-sum investing',
+    body: 'A lump sum invests a larger amount once, while a SIP invests regularly. A lump sum has one contribution compounding for the whole period; a SIP has contributions with different growth periods. Which pattern suits you depends on when money is available and your own circumstances — a calculator compares scenarios, it does not decide for you.',
+    links: [
+      { label: 'Read the SIP vs lump sum guide', href: '/guides/sip-vs-lump-sum' },
+      { label: 'Compound Interest Calculator', href: '/calculators/compound-interest' },
+      { label: 'PPF Calculator', href: '/calculators/ppf' },
+      { label: 'FD Calculator', href: '/calculators/fd' },
+    ],
   },
 ] as const;
 ---

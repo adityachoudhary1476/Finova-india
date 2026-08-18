@@ -10,20 +10,58 @@ if (!definition) throw new Error('Income tax calculator metadata is missing.');
 ---
 <CalculatorShell definition={definition} disclaimer="Income tax depends on residency, age, income types, exemptions, deductions and current law. This focused estimate is not filing or professional tax advice.">
   <IncomeTaxCalculator slot="calculator" client:load />
-  <FormulaSection slot="formula" title="How the tax estimate is built" formula="Taxable income = Included income − permitted deductions; Total tax = (slab tax − rebate/relief) + 4% cess" description="Each portion of taxable income is charged at its slab rate. The configured regime rules then apply eligible rebate or marginal relief and health and education cess." variables={[
+  <FormulaSection slot="formula" title="How the FY 2025-26 estimate is built" formula="Taxable income = Included income − permitted deductions; Total tax = (slab tax − rebate/relief) + 4% cess" description="Each portion of taxable income is charged at its slab rate. The configured regime rules then apply eligible rebate or marginal relief and health and education cess." variables={[
     { symbol: 'Income', meaning: 'Salary plus other normal slab-rate income entered.' }, { symbol: 'Deductions', meaning: 'Regime-specific standard and eligible entered deductions.' }, { symbol: 'Slab tax', meaning: 'Sum of tax calculated within each income band.' }, { symbol: 'Cess', meaning: 'Health and education cess on tax after rebate or relief.' },
   ]} />
   <AssumptionsSection slot="assumptions" items={[
     'The rule set is AY 2026-27 (FY 2025-26) for a resident individual below age 60.',
     'Only salary and other income taxable at normal slab rates are modelled.',
     'New-regime standard deduction, slabs, rebate and marginal relief are configured separately from old-regime rules.',
+    'Old-regime estimates apply the entered 80C deduction (capped at ₹1,50,000) and other user-confirmed deductions; new-regime estimates apply the standard deduction only.',
     'Income is limited to ₹50 lakh because surcharge and surcharge marginal relief are outside this focused estimator.',
     'Capital gains, special-rate income, exemptions, loss set-off, TDS and advance tax are excluded.',
   ]} />
-  <EducationSection slot="education" title="Understand the income tax estimate" intro="Tax is calculated in layers: income, deductions, taxable income, slab tax, rebate or relief, and cess." items={[
-    { title: 'How income tax is calculated', body: 'Included income is reduced by deductions allowed under the selected regime. Each slab then taxes only the income falling inside that band.' },
-    { title: 'Old vs new regime', body: 'The new regime uses different slabs and limits many deductions. The old regime permits entered eligible deductions but uses older slab rates.' },
-    { title: 'Deductions', body: 'The calculator caps entered 80C deduction at ₹1,50,000 for the old-regime estimate. Other entered deductions are accepted only as user-confirmed amounts.' },
-    { title: 'Rebate and cess', body: 'Eligible rebate or marginal relief is applied after slab tax, followed by 4% health and education cess in this configured year.' },
+  <EducationSection slot="education" title="Income tax for FY 2025-26 (AY 2026-27)" intro="This focused estimator covers resident individuals below age 60 with salary and other normal slab-rate income up to ₹50 lakh. Here is what the calculator does, how the estimate is built, and where its limits are." items={[
+    { title: 'What this calculator does', body: 'It estimates income tax for FY 2025-26 (AY 2026-27) under both the old and the new tax regime using the inputs you enter, and compares the two estimates side by side. The result is an estimate: it depends on the income and deduction values entered, the assumptions shown above, and the rules configured for this assessment year. Your actual tax liability can differ where your circumstances involve items outside this tool’s scope.' },
+    { title: 'Old vs new regime: the basic difference', body: 'The new regime uses the newer slab structure with lower headline rates but fewer commonly used deductions and exemptions. The old regime allows specified deductions and exemptions within applicable rules — such as the 80C deduction this calculator accepts — while using the older slab structure. Neither regime is always better: the lower estimate depends on the individual’s income level and the deductions they are genuinely eligible for.' },
+    { title: 'How the calculation works', bullets: [
+      'Total income: salary plus other normal-rate income entered.',
+      'Deductions: the selected regime’s standard deduction, plus the entered deductions allowed under the old regime.',
+      'Taxable income: total income minus total deductions.',
+      'Slab tax: each band of taxable income is charged at that band’s rate.',
+      'Rebate or marginal relief: applied where the configured limits are met.',
+      'Cess: 4% health and education cess on the tax after rebate or relief.',
+      'Estimated total tax: the final amount shown in the results.',
+    ] },
+    { title: 'Example — for illustration only', paragraphs: [
+      'The figures below were calculated with the same function this calculator uses. Inputs: annual salary ₹15,00,000, no other income, Section 80C deduction ₹1,50,000.',
+    ], bullets: [
+      'New regime: standard deduction ₹75,000 → taxable income ₹14,25,000. Slab tax ₹93,750 (₹4,00,000–₹8,00,000 at 5% = ₹20,000; ₹8,00,000–₹12,00,000 at 10% = ₹40,000; ₹12,00,000–₹14,25,000 at 15% = ₹33,750). Rebate/relief ₹0. Cess ₹3,750. Estimated total tax ₹97,500.',
+      'Old regime: standard deduction ₹50,000 + 80C ₹1,50,000 → taxable income ₹13,00,000. Slab tax ₹2,02,500 (₹2,50,000–₹5,00,000 at 5% = ₹12,500; ₹5,00,000–₹10,00,000 at 20% = ₹1,00,000; ₹10,00,000–₹13,00,000 at 30% = ₹90,000). Rebate/relief ₹0. Cess ₹8,100. Estimated total tax ₹2,10,600.',
+      'In this scenario the new-regime estimate is lower by ₹1,13,100 — a result of these inputs, not a general rule: eligibility for deductions and regime choice depend on personal circumstances.',
+    ] },
+    { title: 'Deductions the calculator supports', bullets: [
+      'Standard deduction: ₹75,000 under the new regime and ₹50,000 under the old regime, applied only up to the salary income entered.',
+      'Section 80C: accepted for the old-regime estimate only, capped at ₹1,50,000.',
+      'Other eligible deductions: accepted for the old-regime estimate only, as amounts you have independently confirmed as eligible.',
+      'New-regime estimate: applies the standard deduction only; entered deductions are not applied.',
+    ] },
+    { title: 'Rebate and marginal relief', bullets: [
+      'New regime: rebate up to ₹60,000 when taxable income is ₹12,00,000 or less, with marginal relief for income just above the limit.',
+      'Old regime: rebate up to ₹12,500 when taxable income is ₹5,00,000 or less.',
+      'No rebate applies above these limits, and marginal relief is not part of the old-regime rules configured here.',
+    ] },
+    { title: 'What is not included', bullets: [
+      'Surcharge: income above ₹50 lakh is outside this estimator.',
+      'Capital gains and other income taxed at special rates.',
+      'Exemptions, loss set-off, reliefs and foreign tax credit.',
+      'TDS, advance tax and other payment timing considerations.',
+      'Taxpayers outside the resident individual below-60 category.',
+    ] },
+    { title: 'Related tools and guides', body: 'Estimating take-home pay? You can compare CTC and deductions with Finova’s Salary Calculator, and see how gratuity and other pay components fit your tax planning. The in-hand salary guide explains how net salary is built from CTC.', links: [
+      { label: 'Salary Calculator', href: '/calculators/salary' },
+      { label: 'Gratuity Calculator', href: '/calculators/gratuity' },
+      { label: 'How in-hand salary is calculated from CTC', href: '/guides/in-hand-salary-from-ctc' },
+    ] },
   ]} />
 </CalculatorShell>
